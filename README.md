@@ -28,6 +28,17 @@ On top of that, most applications do not provide time-tracking functionality or 
 
 The purpose of this project is to address these issues. 
 
+## Class Relationship
+a simple class relationship diagram
+
+![class relationship diagram](img/Class%20Relation.png)
+
+A many-to-many relationship is possible between tasks and agendas.
+
+Although an agenda *can* link to multiple events, it is not possible for an event to be linked by multiple agendas (a event is linked to an specific agenda, according to its set date upon initialization)
+
+Projects are not linkable by an agenda. 
+
 ## Commands
 
 ### Command variables
