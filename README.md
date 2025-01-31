@@ -33,7 +33,7 @@ a simple class relationship diagram
 
 ![class relationship diagram](img/Class%20Relation.png)
 
-A many-to-many relationship is possible between tasks and agendas.
+A many-to-many relationship is possible between tasks and agendas. However, only atmic tasks (those without sub-tasks) can be linked.
 
 Although an agenda *can* link to multiple events, it is not possible for an event to be linked by multiple agendas (a event is linked to an specific agenda, according to its set date upon initialization)
 
