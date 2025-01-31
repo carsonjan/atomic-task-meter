@@ -28,8 +28,7 @@ On top of that, most applications do not provide time-tracking functionality or 
 
 The purpose of this project is to address these issues. 
 
-## User Stories
-(functionality & command)
+## Commands
 
 ### Command variables
 - `<name>` - a name
@@ -46,25 +45,39 @@ The purpose of this project is to address these issues.
 	- case insensitive
 - `<time>` - a time, in hours (rounded to 0.25 h intervals)
 
-| As a user, I want to be able to...                                | Use command...                           |
-| ----------------------------------------------------------------- | ---------------------------------------- |
-| **make** a new subject with its name                              | `mk subject <name>`                      |
-| **make** a new event <br>with its name, and date                  | `mk event <name> <date>`                 |
-| **make** a new task <br>with its path, and estimated time         | `mk task <path> <est. time>`             |
-| **remove** an existing subject <br>(with all its tasks), or event | `rm subject <name>`<br>`rm event <name>` |
-| **remove** a task <br>(with all its sub-tasks)                    | `rm task <path>`                         |
-| **move** a task to another location                               | `mv <orig. path> <to. path>`             |
-| **add** a task into an agenda                                     | `add <path> <date>`                      |
-| **drop** a task from an agenda                                    | `drop <path> <date>`                     |
-| **list** all tasks in a subject                                   | `ls subject <name>`                      |
-| **list** all sub-tasks in a task                                  | `ls task <path>`                         |
-| **list** all tasks and events in an agenda                        | `ls agenda <date>`                       |
-| **start** timing a task                                           | `start <path>`                           |
-| **stop** timing a task                                            | `stop <path>`                            |
-| mark a task as **done**                                           | `done <path>`                            |
-| mark a task as **undone**                                         | `undone <path>`                          |
-| show current **state**<br>(task timing & file loaded)             | `state`                                  |
-| **quit** the application                                          | `quit`                                   |
-| **clear** the terminal                                            | `clear`                                  |
-| get **help** with a list of commands                              | `help`                                   |
-| get **help** for a specific command                               | `help <cmd. name>`                       |
+
+| As a user, I want to be able to...                                                     | Use command...                           |
+| -------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **make** a new subject with its name                                                   | `mk subject <name>`                      |
+| **make** a new event <br>with its name, and date                                       | `mk event <name> <date>`                 |
+| **make** a new task <br>with its path, and estimated time                              | `mk task <path> <est. time>`             |
+| **remove** an existing subject <br>(with all its tasks), or event                      | `rm subject <name>`<br>`rm event <name>` |
+| **remove** a task <br>(with all its sub-tasks)                                         | `rm task <path>`                         |
+| **move** a task to another location                                                    | `mv <orig. path> <to. path>`             |
+| **add** a task into an agenda                                                          | `add <path> <date>`                      |
+| **drop** a task from an agenda                                                         | `drop <path> <date>`                     |
+| **list** all tasks in a subject<br>**list** all subjects the current file              | `ls subject <name>`<br>`ls subject`      |
+| **list** all sub-tasks in a task                                                       | `ls task <path>`                         |
+| **list** all tasks and events in an agenda<br>**list** all agendas in the current file | `ls agenda <date>`<br>`ls agenda`        |
+| **start** timing a task                                                                | `start <path>`                           |
+| **stop** timing a task                                                                 | `stop <path>`                            |
+| mark a task as **done**                                                                | `done <path>`                            |
+| mark a task as **undone**                                                              | `undone <path>`                          |
+| show current **state**<br>(task timing & file loaded)                                  | `state`                                  |
+| **quit** the application                                                               | `quit`                                   |
+| **clear** the terminal                                                                 | `clear`                                  |
+| get **help** with a list of commands                                                   | `help`                                   |
+| get **help** for a specific command                                                    | `help <cmd. name>`                       |
+
+## User stories
+(short version of `#commands` for TA grading)
+
+As a user, I want to be able to:
+1. make a subject with its name and add it into the "collection of subjects"
+    - which can be done with a single `mk subject <name>` command
+2. read all subjects in the collection
+    - which can be done with `ls subject`
+3. remove a subject from the collection
+    - which can be done with `rm subject <name>`
+4. mark a task as done
+    - which can be done with `done <path>`
