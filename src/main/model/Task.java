@@ -26,13 +26,13 @@ public class Task {
         this.actTime = Duration.ZERO;
         this.isDone = false;
         this.subTasks = new HashMap<String, Task>();
-        
+
         String[] subjectAndPath = path.split("//");
         this.subjectName = subjectAndPath[0];
         String pathNoSubj = subjectAndPath[1];
         int lastDelim = pathNoSubj.lastIndexOf("/"); // the / that separates out task name
         if (lastDelim != -1) {  // have parents eg: project/proj1
-            this.name = pathNoSubj.substring(lastDelim+1); 
+            this.name = pathNoSubj.substring(lastDelim + 1); 
             this.parentPath = subjectName + "//" + pathNoSubj.substring(0, lastDelim);
         } else {  // no parents eg: register
             this.name = pathNoSubj;
