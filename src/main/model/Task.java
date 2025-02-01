@@ -10,9 +10,9 @@ public class Task {
     private Duration actTime;   // actual time (minutes) to finish the task OR all subtasks if subTasks not empty
     private boolean isDone;     // if the project is done?
     private HashMap<String, Task> subTasks; // collection of subtasks that belongs to this task, with their path as key
-    private Subject subject;    // subject this task belongs to, derived from path
+    private String subjectName;    // subject this task belongs to, derived from path
     private String name;        // name of this task, derived from path
-    private String parentPath;  // path of this task's parent, derive from path
+    private String parentPath;  // path of this task's parent, derive from path, null if none
 
     /*
      * REQUIRES: path is correctly formatted and not empty. estTime is a positive integer 
@@ -26,11 +26,18 @@ public class Task {
         this.actTime = Duration.ZERO;
         this.isDone = false;
         this.subTasks = new HashMap<String, Task>();
-        int lastDelim = path.lastIndexOf("/"); // the / that separates out task name
-        int subjDelim = path.indexOf("//"); // the // that separates out subject
-        this.name = path.substring(lastDelim); 
-        this.parentPath = path.substring(0, lastDelim);
-        this.subject = new Subject(path.substring(0, subjDelim));
+        
+        String[] subjectAndPath = path.split("//");
+        this.subjectName = subjectAndPath[0];
+        String pathNoSubj = subjectAndPath[1];
+        int lastDelim = pathNoSubj.lastIndexOf("/"); // the / that separates out task name
+        if (lastDelim != -1) {  // have parents eg: project/proj1
+            this.name = pathNoSubj.substring(lastDelim+1); 
+            this.parentPath = subjectName + "//" + pathNoSubj.substring(0, lastDelim);
+        } else {  // no parents eg: register
+            this.name = pathNoSubj;
+            this.parentPath = null;
+        }
     }
 
     // start getters
@@ -54,8 +61,8 @@ public class Task {
         return subTasks;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public String getSubjectName() {
+        return subjectName;
     }
 
     public String getName() {
