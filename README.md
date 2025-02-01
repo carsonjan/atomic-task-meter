@@ -47,8 +47,7 @@ Projects are not linkable by an agenda.
 	- must not include white space, forward slash (`/`), or double quote (`"`)
 	- case insensitive
 - `<date>` - a date, or an agenda's unique identifier
-	- must be in the form of `01_Jan_2025`, include underscores 
-	- case insensitive
+	- must be in the form of ISO Date, eg: `2025-10-30`, indicating 30th Oct, 2025
 - `<path>` - a path to a task
 	- must be in the form of `subject//parent_task(s)/task`
 	  (tasks separated with forward slash `/`)
