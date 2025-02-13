@@ -19,7 +19,7 @@ public class TestSubject {
     }
 
     @Test
-    void SubjectTest() {
+    void testSubject() {
         assertEquals("MATH-100", subject1.getName());
         assertEquals(Duration.ZERO, subject1.getEstTime());
         assertEquals(Duration.ZERO, subject1.getActTime());

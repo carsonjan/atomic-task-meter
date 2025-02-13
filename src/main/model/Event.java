@@ -16,7 +16,6 @@ public class Event {
         this.date = LocalDate.parse(date);
     }
 
-    // start getters
     public String getName() {
         return name;
     }
@@ -25,5 +24,4 @@ public class Event {
         return date;
     }
 
-    // end getters
 }

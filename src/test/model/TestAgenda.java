@@ -20,7 +20,7 @@ public class TestAgenda {
     }
 
     @Test
-    void AgendaTest() {
+    void testAgenda() {
         assertEquals(LocalDate.of(2025, 2, 1), agenda1.getDate());
         assertTrue(agenda1.getEvents().isEmpty());
         assertTrue(agenda1.getTasks().isEmpty());

@@ -19,7 +19,7 @@ public class TestEvent {
     }
 
     @Test
-    void SubjectTest() {
+    void testEvent() {
         assertEquals("MATH-MT1", event1.getName());
         assertEquals(LocalDate.of(2025, 2, 1), event1.getDate());
 

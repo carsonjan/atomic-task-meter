@@ -4,29 +4,28 @@ import java.time.Duration;
 import java.util.HashMap;
 
 // Represents a task with its path, estimated time, actual time, is done?, sub-tasks
-public class Task {
+public class Task extends NodeLike {
     private String path;        // unique: path to the task
-    private Duration estTime;   // estimated time (minutes) to finish the task OR all subtasks if subTasks not empty
-    private Duration actTime;   // actual time (minutes) to finish the task OR all subtasks if subTasks not empty
     private boolean isDone;     // if the project is done?
-    private HashMap<String, Task> subTasks; // collection of subtasks that belongs to this task, with their path as key
+
     private String subjectName;    // subject this task belongs to, derived from path
     private String name;        // name of this task, derived from path
     private String parentPath;  // path of this task's parent, derive from path, null if none
 
     /*
-     * REQUIRES: path is correctly formatted and not empty. estTime is a positive integer 
+     * REQUIRES: path is correctly formatted and not empty. estTime is a positive number of hours  
      * EFFECTS: initializes a Task with its path, estimated time, sub-tasks
      *          and actual time to zero, is done? to false.
      *          derive path into additional task name, parent path, subject variable
      */
-    public Task(String path, int estTime) {
+    public Task(String path, double estTime) {
+        super();
         this.path = path;
-        this.estTime = Duration.ofMinutes((long) estTime); // store duration as minutes
-        this.actTime = Duration.ZERO;
         this.isDone = false;
-        this.subTasks = new HashMap<String, Task>();
+        this.estTime = Duration.ofHours((long) estTime);
+        this.tasks = new HashMap<String, Task>();
 
+        // derive other parameters from path
         String[] subjectAndPath = path.split("//");
         this.subjectName = subjectAndPath[0];
         String pathNoSubj = subjectAndPath[1];
@@ -40,25 +39,12 @@ public class Task {
         }
     }
 
-    // start getters
     public String getPath() {
         return path;
     }
 
-    public Duration getEstTime() {
-        return estTime;
-    }
-
-    public Duration getActTime() {
-        return actTime;
-    }
-
     public boolean isDone() {
         return isDone;
-    }
-
-    public HashMap<String, Task> getSubTasks() {
-        return subTasks;
     }
 
     public String getSubjectName() {
@@ -73,5 +59,4 @@ public class Task {
         return parentPath;
     }
     
-    // end getters
 }

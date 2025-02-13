@@ -15,15 +15,15 @@ public class TestTask {
 
     @BeforeEach
     void runBefore() {
-        task1 = new Task("MATH-100//tests-study/MT1-study", 180);
-        task2 = new Task("CHEM-123//homework/ch1/pre-read", 60);
-        task3 = new Task("CHEM-123//register", 15);
+        task1 = new Task("MATH-100//tests-study/MT1-study", 3);
+        task2 = new Task("CHEM-123//homework/ch1/pre-read", 1);
+        task3 = new Task("CHEM-123//register", 0.25);
     }
 
     @Test
-    void TaskTest() {
+    void testTask() {
         assertEquals("MATH-100//tests-study/MT1-study", task1.getPath());
-        assertEquals(Duration.ofMinutes((long) 180), task1.getEstTime());
+        assertEquals(Duration.ofHours((long) 3), task1.getEstTime());
         assertEquals(Duration.ZERO, task1.getActTime());
         assertFalse(task1.isDone());
         assertEquals("MT1-study", task1.getName());
@@ -31,7 +31,7 @@ public class TestTask {
         assertEquals("MATH-100", task1.getSubjectName());
 
         assertEquals("CHEM-123//homework/ch1/pre-read", task2.getPath());
-        assertEquals(Duration.ofMinutes((long) 60), task2.getEstTime());
+        assertEquals(Duration.ofHours((long) 1), task2.getEstTime());
         assertEquals(Duration.ZERO, task2.getActTime());
         assertFalse(task2.isDone());
         assertEquals("pre-read", task2.getName());
@@ -39,7 +39,7 @@ public class TestTask {
         assertEquals("CHEM-123", task2.getSubjectName());
 
         assertEquals("CHEM-123//register", task3.getPath());
-        assertEquals(Duration.ofMinutes((long) 15), task3.getEstTime());
+        assertEquals(Duration.ofHours((long) 0.25), task3.getEstTime());
         assertEquals(Duration.ZERO, task3.getActTime());
         assertFalse(task3.isDone());
         assertEquals("register", task3.getName());
