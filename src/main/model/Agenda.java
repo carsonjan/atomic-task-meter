@@ -1,7 +1,10 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.Duration;
 import java.util.HashMap;
+
+import exceptions.*;
 
 // Represents an agenda with its date, events, tasks, estimated time, actual time
 public class Agenda extends NodeLike {
@@ -27,4 +30,49 @@ public class Agenda extends NodeLike {
         return events;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: add event into events, throw if name already exist in events' keys
+     */
+    public void addEvent(Event event) throws DuplicateNameException {
+        // stub
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: remove event with key=name from events, return the event removed,
+     *          throw if date not exist in events' keys
+     */
+    public Event removeEvent(String name) throws NameNotExistException {
+        return null; // stub
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: return event with key=name from events
+     *          throw if date not exist in events' keys
+     */
+    public Event findEvent(String name) throws NameNotExistException {
+        return null; // stub
+    }
+
+    /*
+     * REQUIRES: all task in tasks has correct estTime
+     * MODIFIES: this
+     * EFFECTS: make self.estTime the sum of tasks' estTime and return the sum
+     */
+    @Override
+    public Duration updateEstTime() {
+        return null; // stub
+    }
+
+    /*
+     * REQUIRES: all task in tasks has correct actTime
+     * MODIFIES: this
+     * EFFECTS: make self.actTime the sum of tasks' actTime and return the sum
+     */
+    @Override
+    public Duration updateActTime() {
+        return null; // stub
+    }
 }
