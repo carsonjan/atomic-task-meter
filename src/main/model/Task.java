@@ -67,7 +67,9 @@ public class Task extends NodeLike {
      *          else return false
      */
     public Boolean markDone() {
-        return false; // stub
+        boolean result = !isDone; // isDone = True -> result = False
+        this.isDone = true;
+        return result;
     }
 
     /*
@@ -77,7 +79,9 @@ public class Task extends NodeLike {
      *          else return false
      */
     public Boolean markUndone() {
-        return false; // stub
+        boolean result = isDone; // isDone = False -> result = False
+        this.isDone = false;
+        return result;
     }
 
     /*
@@ -86,7 +90,7 @@ public class Task extends NodeLike {
      * EFFECTS: add duration to the task's actual time
      */
     public void addActTime(Duration duration) {
-        // stub
+        this.actTime.plus(duration);
     }
     
 }

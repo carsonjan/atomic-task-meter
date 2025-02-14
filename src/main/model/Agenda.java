@@ -35,25 +35,37 @@ public class Agenda extends NodeLike {
      * EFFECTS: add event into events, throw if name already exist in events' keys
      */
     public void addEvent(Event event) throws DuplicateNameException {
-        // stub
+        String eventName = event.getName();
+        if (events.containsKey(eventName)) {
+            throw new DuplicateNameException();
+        }
+        events.put(eventName, event);
     }
 
     /*
      * MODIFIES: this
      * EFFECTS: remove event with key=name from events, return the event removed,
-     *          throw if date not exist in events' keys
+     *          throw if name not exist in events' keys
      */
     public Event removeEvent(String name) throws NameNotExistException {
-        return null; // stub
+        Event event = events.remove(name);
+        if (event == null) {
+            throw new NameNotExistException();
+        }
+        return event;
     }
 
     /*
      * MODIFIES: this
      * EFFECTS: return event with key=name from events
-     *          throw if date not exist in events' keys
+     *          throw if name not exist in events' keys
      */
     public Event findEvent(String name) throws NameNotExistException {
-        return null; // stub
+        Event event = events.get(name);
+        if (event == null) {
+            throw new NameNotExistException();
+        }
+        return event;
     }
 
     /*
@@ -63,7 +75,11 @@ public class Agenda extends NodeLike {
      */
     @Override
     public Duration updateEstTime() {
-        return null; // stub
+        Duration sum = Duration.ZERO;
+        for (Task task : tasks.values()) {
+            sum.plus(task.getEstTime());
+        }
+        return sum;
     }
 
     /*
@@ -73,6 +89,10 @@ public class Agenda extends NodeLike {
      */
     @Override
     public Duration updateActTime() {
-        return null; // stub
+        Duration sum = Duration.ZERO;
+        for (Task task : tasks.values()) {
+            sum.plus(task.getActTime());
+        }
+        return sum;
     }
 }

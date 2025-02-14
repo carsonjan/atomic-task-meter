@@ -54,7 +54,11 @@ public abstract class NodeLike {
      * EFFECTS: add task into tasks, throw if path already exist in tasks' keys
      */
     public void addTask(Task task) throws DuplicatePathException {
-        // stub
+        String taskPath = task.getPath();
+        if (tasks.containsKey(taskPath)) {
+            throw new DuplicatePathException();
+        }
+        tasks.put(taskPath, task);
     }
 
     /*
@@ -63,7 +67,11 @@ public abstract class NodeLike {
      *          throw if path not exist in task's keys
      */
     public Task removeTask(String path) throws PathNotExistException {
-        return null; // stub
+        Task task = tasks.remove(path);
+        if (task == null) {
+            throw new PathNotExistException();
+        }
+        return task;
     }
 
     /*
@@ -72,7 +80,11 @@ public abstract class NodeLike {
      *          throw if path not exist in task's keys
      */
     public Task findTask(String path) throws PathNotExistException {
-        return null; // stub
+        Task task = task.get(path);
+        if (task == null) {
+            throw new PathNotExistException();
+        }
+        return task;
     }
-
+// TODO: debug + need recursive find?
 }
