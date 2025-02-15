@@ -3,6 +3,6 @@ package ui;
 public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("== Atomic Task Meter ==");
-        new ATMApp();
+        new AtmApp();
     }
 }
