@@ -36,24 +36,24 @@ public abstract class NodeLike {
      * EFFECTS: add task into tasks
      */
     public void addTask(Task task) {
-        // stub
+        tasks.put(task.getPath(), task); // stub
     }
 
     /*
      * REQUIRES: task exists in tasks
      * MODIFIES: this
-     * EFFECTS: remove task from tasks
+     * EFFECTS: remove task with path from tasks
      */
-    public void removeTask(Task task) {
-        // stub
+    public void removeTask(String taskPath) {
+        tasks.remove(taskPath); // stub
     }
 
     /*
      * EFFECTS: return task with path from tasks
-     *          throw if path not exist in task's keys
+     *          return null if path not exist in task's keys
      */
     public Task findTask(String taskPath) {
-        return null; // stub
+        return tasks.get(taskPath); // stub
     }
 
     /*
@@ -61,6 +61,10 @@ public abstract class NodeLike {
      * EFFECTS: totalEstTime = sum of all tasks' estTime
      */
     public void updateTotalEstTime() {
+        totalEstTime = Duration.ZERO;
+        for (Task task : tasks.values()) {
+            totalEstTime = totalEstTime.plus(task.getEstTime());
+        }
         // stub
     }
 
@@ -69,6 +73,10 @@ public abstract class NodeLike {
      * EFFECTS: totalActTime = sum of all tasks' actTime
      */
     public void updateTotalActTime() {
+        totalActTime = Duration.ZERO;
+        for (Task task : tasks.values()) {
+            totalActTime = totalActTime.plus(task.getActTime());
+        }
         // stub
     }
 }

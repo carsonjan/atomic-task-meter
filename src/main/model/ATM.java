@@ -7,14 +7,14 @@ import java.util.HashMap;
 // an Atomic Task Meter object
 public class ATM {
     private HashMap<String, Project> projects; // project with its name as key
-    private HashMap<LocalDate, Agenda> agendas; // agenda with its date as key
+    // private HashMap<LocalDate, Agenda> agendas; // agenda with its date as key TODO
     private Task currentTask; // the task currently timing
     private LocalDateTime lastStartTime; // the time when the task started
 
     // EFFECTS: create an ATM object all empty fields
     public ATM() {
         projects = new HashMap<String, Project>();
-        agendas = new HashMap<LocalDate, Agenda>();
+        // agendas = new HashMap<LocalDate, Agenda>(); TODO
         currentTask = null;
         lastStartTime = null;
     }
@@ -23,9 +23,9 @@ public class ATM {
         return projects;
     }
 
-    public HashMap<LocalDate, Agenda> getAgendas() {
-        return agendas;
-    }
+    // public HashMap<LocalDate, Agenda> getAgendas() {
+    //     return agendas;
+    // }
 
     public Task getCurrentTask() {
         return currentTask;
@@ -35,6 +35,10 @@ public class ATM {
         return lastStartTime;
     }
 
+    public void setLastStartTime(LocalDateTime lastStartTime) {
+        this.lastStartTime = lastStartTime;
+    }
+
     /*
      * REQUIRES: name does not consist forward slashes
      *           name not already exist in projects
@@ -42,52 +46,54 @@ public class ATM {
      * EFFECTS: make a empty project with name, and add into projects
      */
     public void makeProject(String name) {
+        Project project = new Project(name);
+        projects.put(name, project);
         // stub
     }
 
-    /*
-     * REQUIRES: date not already exist in agendas
-     * MODIFIES: this
-     * EFFECTS: make a empty agenda with Date= date from dateString, and add into agendas
-     */
-    public void makeAgenda(String dateString) {
-        // stub
-    }
+    // /*
+    //  * REQUIRES: date not already exist in agendas
+    //  * MODIFIES: this
+    //  * EFFECTS: make a empty agenda with Date= date from dateString, and add into agendas
+    //  */
+    // public void makeAgenda(String dateString) {
+    //     // stub
+    // }
 
     /*
      * EFFECTS:return project with name from projects,
      *         return null if not founded
      */
     public Project findProject(String name) {
-        return null; // stub
+        return projects.get(name); // stub
     }
 
-    /*
-     * EFFECTS:return agenda with date= date from dateString from agenda,
-     *         return null if not founded
-     */
-    public Agenda findAgenda(String dateString) {
-        return null; // stub
-    }
+    // /*
+    //  * EFFECTS:return agenda with date= date from dateString from agenda,
+    //  *         return null if not founded
+    //  */
+    // public Agenda findAgenda(String dateString) {
+    //     return null; // stub
+    // }
 
     /*
      * MODIFIES: this, project
      * EFFECTS:remove and return project with name from projects,
-     *         !! also remove all it's tasks
+     *         !! also remove all it's tasks from agendas (TODO)
      *         return null if not founded
      */
     public Project removeProject(String name) {
-        return null; // stub
+        return projects.remove(name); // stub
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:remove and return agenda with date= date from dateString from agenda,
-     *         return null if not founded
-     */
-    public Agenda removeAgenda(String dateString) {
-        return null; // stub
-    }
+    // /*
+    //  * MODIFIES: this
+    //  * EFFECTS:remove and return agenda with date= date from dateString from agenda,
+    //  *         return null if not founded
+    //  */
+    // public Agenda removeAgenda(String dateString) {
+    //     return null; // stub
+    // }
 
     /*
      * REQUIRES: projectName exists in projects,
@@ -96,6 +102,8 @@ public class ATM {
      * EFFECTS: make a task and add it into project
      */
     public void makeTask(String projectName, String taskName, double estTime) {
+        Task task = new Task(projectName + "//" + taskName, estTime);
+        findProject(projectName).addTask(task);
         // stub
     }
 
@@ -106,18 +114,21 @@ public class ATM {
      *          returns null if task not found
      */
     public Task findTask(String projectName, String taskName) {
-        return null; // stub
+        return findProject(projectName).findTask(projectName + "//" + taskName); // stub
     }
 
     /*
      * REQUIRES: projectName exists in projects
      * MODIFIES: this, project, agenda
      * EFFECTS: remove and return a task with taskName from project with projectName
-     *          !! Also remove task from all agendas
+     *          !! Also remove task from all agendas (TODO)
      *          returns null if task not found
      */
     public Task removeTask(String projectName, String taskName) {
-        return null; // stub
+        Project project = findProject(projectName);
+        Task task = project.findTask(projectName + "//" + taskName);
+        project.removeTask(projectName + "//" + taskName);
+        return task; // stub
     }
 
     /*
@@ -127,7 +138,13 @@ public class ATM {
      *          !! returns subject//taskName if a task is already timing, else null
      */
     public String startTask(Task task) {
-        return null; // stub
+        if (currentTask == null) {
+            currentTask = task;
+            lastStartTime = LocalDateTime.now();
+            return null;
+        } else {
+            return currentTask.getPath();
+        }
     }
 
     /*
@@ -148,23 +165,23 @@ public class ATM {
         return Math.round(deltaH * 100) / 100.0; // stub
     }
 
-    /*
-     * REQUIRES: all arguments exists
-     * MODIFIES: agenda
-     * EFFECTS: add a task to an agenda
-     */
-    public void addTask(String projectName, String taskName, String dateString) {
-        // stub
-    }
+    // /*
+    //  * REQUIRES: all arguments exists
+    //  * MODIFIES: agenda
+    //  * EFFECTS: add a task to an agenda
+    //  */
+    // public void addTask(String projectName, String taskName, String dateString) {
+    //     // stub
+    // }
 
-    /*
-     * REQUIRES: all arguments exists
-     * MODIFIES: agenda
-     * EFFECTS: remove a task to an agenda
-     */
-    public void dropTask(String projectName, String taskName, String dateString) {
-        // stub
-    }
+    // /*
+    //  * REQUIRES: all arguments exists
+    //  * MODIFIES: agenda
+    //  * EFFECTS: remove a task to an agenda
+    //  */
+    // public void dropTask(String projectName, String taskName, String dateString) {
+    //     // stub
+    // }
 
     /*
      * REQUIRES: projectName exists
@@ -172,16 +189,26 @@ public class ATM {
      * EFFECTS: update estTime and actTime for the project with projectName
      */
     public void updateProjectTime(String projectName) {
+        findProject(projectName).updateTotalEstTime();
+        findProject(projectName).updateTotalActTime();
         // stub
     }
 
+    // /*
+    //  * REQUIRES: agendaDate exists
+    //  * MODIFIES: agenda
+    //  * EFFECTS: update estTime and actTime for the agenda with AgendaDate
+    //  */
+    // public void updateAgendaTime(LocalDate agendaDate) {
+    //     // stub
+    // }
+
     /*
-     * REQUIRES: agendaDate exists
-     * MODIFIES: agenda
-     * EFFECTS: update estTime and actTime for the agenda with AgendaDate
+     * EFFECTS: format duration into hours, with max 2 decimals
      */
-    public void updateAgendaTime(LocalDate agendaDate) {
-        // stub
+    public double formatTime(Duration duration) {
+        double hours = duration.toMinutes() / 60.0;
+        return Math.floor(hours * 100) / 100;
     }
 
 }

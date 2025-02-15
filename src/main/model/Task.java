@@ -22,7 +22,7 @@ public class Task {
     public Task(String path, double estTime) {
         this.path = path;
         this.isDone = false;
-        this.estTime = Duration.ofMinutes((long) estTime*60);
+        this.estTime = Duration.ofMinutes(Math.round(estTime * 60.0));
         this.actTime = Duration.ZERO;
 
         String[] splitPath = path.split("//");
@@ -34,7 +34,7 @@ public class Task {
         return path;
     }
 
-    public boolean isDone() {
+    public boolean getIsDone() {
         return isDone;
     }
 
@@ -84,7 +84,7 @@ public class Task {
      * EFFECTS: add duration to the task's actual time
      */
     public void addActTime(Duration duration) {
-        this.actTime.plus(duration);
+        actTime = actTime.plus(duration);
     }
     
 }
