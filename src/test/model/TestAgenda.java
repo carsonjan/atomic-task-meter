@@ -31,14 +31,14 @@ public class TestAgenda {
         assertEquals(LocalDate.of(2025, 2, 1), agenda1.getDate());
         assertTrue(agenda1.getEvents().isEmpty());
         assertTrue(agenda1.getTasks().isEmpty());
-        assertEquals(Duration.ZERO, agenda1.getEstTime());
-        assertEquals(Duration.ZERO, agenda1.getActTime());
+        assertEquals(Duration.ZERO, agenda1.getTotalEstTime());
+        assertEquals(Duration.ZERO, agenda1.getTotalActTime());
 
         assertEquals(LocalDate.of(2028, 8, 31), agenda2.getDate());
         assertTrue(agenda2.getEvents().isEmpty());
         assertTrue(agenda2.getTasks().isEmpty());
-        assertEquals(Duration.ZERO, agenda2.getEstTime());
-        assertEquals(Duration.ZERO, agenda2.getActTime());
+        assertEquals(Duration.ZERO, agenda2.getTotalEstTime());
+        assertEquals(Duration.ZERO, agenda2.getTotalActTime());
     }
 
     @Test
@@ -100,16 +100,16 @@ public class TestAgenda {
 
     @Test
     void testUpdateEstTime() {
-        assertEquals(Duration.ZERO, agenda1.getEstTime());
+        assertEquals(Duration.ZERO, agenda1.getTotalEstTime());
         Task task1 = new Task("MATH-100//tests-study/MT1-study", 3);
         Task task4 = new Task("MATH-100//tests-study/MT1-PP", 2);
         try {
             agenda1.addTask(task1);
             agenda1.updateEstTime();
-            assertEquals(Duration.ofHours(3), agenda1.getEstTime());
+            assertEquals(Duration.ofHours(3), agenda1.getTotalEstTime());
             agenda1.addTask(task4);
             agenda1.updateEstTime();
-            assertEquals(Duration.ofHours(5), agenda1.getEstTime());
+            assertEquals(Duration.ofHours(5), agenda1.getTotalEstTime());
         } catch (Exception e) {
             fail();
         }
@@ -117,22 +117,22 @@ public class TestAgenda {
 
     @Test
     void testUpdateActTime() {
-        assertEquals(Duration.ZERO, agenda1.getActTime());
+        assertEquals(Duration.ZERO, agenda1.getTotalActTime());
         Task task1 = new Task("MATH-100//tests-study/MT1-study", 3);
         Task task4 = new Task("MATH-100//tests-study/MT1-PP", 2);
         try {
             agenda1.addTask(task1);
             agenda1.updateActTime();
-            assertEquals(Duration.ZERO, agenda1.getActTime());
+            assertEquals(Duration.ZERO, agenda1.getTotalActTime());
             task1.addActTime(Duration.ofHours(1));
             agenda1.updateActTime();
-            assertEquals(Duration.ofHours(1), agenda1.getActTime());
+            assertEquals(Duration.ofHours(1), agenda1.getTotalActTime());
             agenda1.addTask(task4);
             agenda1.updateActTime();
-            assertEquals(Duration.ofHours(1), agenda1.getActTime());
+            assertEquals(Duration.ofHours(1), agenda1.getTotalActTime());
             task4.addActTime(Duration.ofHours(2));
             agenda1.updateActTime();
-            assertEquals(Duration.ofHours(3), agenda1.getActTime());
+            assertEquals(Duration.ofHours(3), agenda1.getTotalActTime());
         } catch (Exception e) {
             fail();
         }

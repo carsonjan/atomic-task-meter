@@ -2,29 +2,28 @@ package model;
 
 import java.time.Duration;
 import java.util.HashMap;
-import exceptions.*;
 
-// Abstract class that Represents a Node-Like objects (Subject, Task, Agenda)
+// Abstract class that Represents a Node-Like object (Project, Agenda)
 public abstract class NodeLike {
-    protected Duration estTime;   // estimated time (hours) to finish the task OR all subtasks if Tasks not empty
-    protected Duration actTime;   // actual time (hours) to finish the task OR all subtasks if Tasks not empty
-    protected HashMap<String, Task> tasks;        // collection of tasks that belongs to the Node, path as key
+    protected Duration totalEstTime;   // total estimate time to finish all tasks
+    protected Duration totalActTime;   // total actual time to finish all tasks
+    protected HashMap<String, Task> tasks;   // collection of tasks that belongs to the Node, path as key
 
     /*
      * EFFECTS: initializes the Node. Set estimated and actual time to zero, tasks to empty collection
      */
     public NodeLike() {
-        this.estTime = Duration.ZERO;
-        this.actTime = Duration.ZERO;
+        this.totalEstTime = Duration.ZERO;
+        this.totalActTime = Duration.ZERO;
         this.tasks = new HashMap<String, Task>();
     }
 
-    public Duration getEstTime() {
-        return estTime;
+    public Duration getTotalEstTime() {
+        return totalEstTime;
     }
 
-    public Duration getActTime() {
-        return actTime;
+    public Duration getTotalActTime() {
+        return totalActTime;
     }
 
     public HashMap<String, Task> getTasks() {
@@ -32,59 +31,44 @@ public abstract class NodeLike {
     }
 
     /*
+     * REQUIRES: task not already in tasks
      * MODIFIES: this
-     * EFFECTS: if tasks is empty, return self.estTime. 
-     *          if tasks not empty, make self.estTime the sum of tasks' estTime and return the sum
+     * EFFECTS: add task into tasks
      */
-    public Duration updateEstTime() {
-        return null;// stub
+    public void addTask(Task task) {
+        // stub
     }
 
     /*
+     * REQUIRES: task exists in tasks
      * MODIFIES: this
-     * EFFECTS: if tasks is empty, return self.actTime. 
-     *          if tasks not empty, make self.actTime the sum of tasks' actTime and return the sum
+     * EFFECTS: remove task from tasks
      */
-    public Duration updateActTime() {
+    public void removeTask(Task task) {
+        // stub
+    }
+
+    /*
+     * EFFECTS: return task with path from tasks
+     *          throw if path not exist in task's keys
+     */
+    public Task findTask(String taskPath) {
         return null; // stub
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS: add task into tasks, throw if path already exist in tasks' keys
+     * EFFECTS: totalEstTime = sum of all tasks' estTime
      */
-    public void addTask(Task task) throws DuplicatePathException {
-        String taskPath = task.getPath();
-        if (tasks.containsKey(taskPath)) {
-            throw new DuplicatePathException();
-        }
-        tasks.put(taskPath, task);
+    public void updateTotalEstTime() {
+        // stub
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS: remove task with key=path from tasks, return the task removed,
-     *          throw if path not exist in task's keys
+     * EFFECTS: totalActTime = sum of all tasks' actTime
      */
-    public Task removeTask(String path) throws PathNotExistException {
-        Task task = tasks.remove(path);
-        if (task == null) {
-            throw new PathNotExistException();
-        }
-        return task;
+    public void updateTotalActTime() {
+        // stub
     }
-
-    /*
-     * MODIFIES: this
-     * EFFECTS: return task with key=path from tasks
-     *          throw if path not exist in task's keys
-     */
-    public Task findTask(String path) throws PathNotExistException {
-        Task task = task.get(path);
-        if (task == null) {
-            throw new PathNotExistException();
-        }
-        return task;
-    }
-// TODO: debug + need recursive find?
 }

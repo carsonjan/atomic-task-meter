@@ -1,43 +1,33 @@
 package model;
 
 import java.time.Duration;
-import java.util.HashMap;
 
-// Represents a task with its path, estimated time, actual time, is done?, sub-tasks
-public class Task extends NodeLike {
+// Represents a task with its name, estimated time, actual time, is done?
+public class Task {
     private String path;        // unique: path to the task
     private boolean isDone;     // if the project is done?
+    private Duration estTime; // estimated time to finish task
+    private Duration actTime; // actual time to finish task
 
-    private String subjectName;    // subject this task belongs to, derived from path
-    private String name;        // name of this task, derived from path
-    private String parentPath;  // path of this task's parent, derive from path, null if none
+    private String projectName; // name of the project this task belongs to
+    private String name; // name of this task
 
     /*
      * REQUIRES: path is correctly formatted and not empty. 
      *          estTime is a positive number of hours
-     * EFFECTS: initializes a Task with its path, estimated time, sub-tasks
+     * EFFECTS: initializes a Task with its path, estimated time
      *          and actual time to zero, is done? to false.
-     *          derive path into additional task name, parent path, subject variable
+     *          derive path into additional subject name, task name
      */
     public Task(String path, double estTime) {
-        super();
         this.path = path;
         this.isDone = false;
-        this.estTime = Duration.ofMinutes((long) (estTime * 60));
-        this.tasks = new HashMap<String, Task>();
+        this.estTime = Duration.ofMinutes((long) estTime*60);
+        this.actTime = Duration.ZERO;
 
-        // derive other parameters from path
-        String[] subjectAndPath = path.split("//");
-        this.subjectName = subjectAndPath[0];
-        String pathNoSubj = subjectAndPath[1];
-        int lastDelim = pathNoSubj.lastIndexOf("/"); // the / that separates out task name
-        if (lastDelim != -1) {  // have parent task eg: project/proj1
-            this.name = pathNoSubj.substring(lastDelim + 1); 
-            this.parentPath = subjectName + "//" + pathNoSubj.substring(0, lastDelim);
-        } else {  // no parent task eg: register
-            this.name = pathNoSubj;
-            this.parentPath = null;
-        }
+        String[] splitPath = path.split("//");
+        this.projectName = splitPath[0];
+        this.name = splitPath[1];
     }
 
     public String getPath() {
@@ -48,16 +38,20 @@ public class Task extends NodeLike {
         return isDone;
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public Duration getEstTime() {
+        return estTime;
+    }
+
+    public Duration getActTime() {
+        return actTime;
+    }
+
+    public String getProjectName() {
+        return projectName;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getParentPath() {
-        return parentPath;
     }
 
     /*

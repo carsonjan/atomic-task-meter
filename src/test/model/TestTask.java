@@ -32,24 +32,24 @@ public class TestTask {
     @Test
     void testTask() {
         assertEquals("MATH-100//tests-study/MT1-study", task1.getPath());
-        assertEquals(Duration.ofHours((long) 3), task1.getEstTime());
-        assertEquals(Duration.ZERO, task1.getActTime());
+        assertEquals(Duration.ofHours((long) 3), task1.getTotalEstTime());
+        assertEquals(Duration.ZERO, task1.getTotalActTime());
         assertFalse(task1.isDone());
         assertEquals("MT1-study", task1.getName());
         assertEquals("MATH-100//tests-study", task1.getParentPath());
         assertEquals("MATH-100", task1.getSubjectName());
 
         assertEquals("CHEM-123//homework/ch1/pre-read", task2.getPath());
-        assertEquals(Duration.ofHours((long) 1), task2.getEstTime());
-        assertEquals(Duration.ZERO, task2.getActTime());
+        assertEquals(Duration.ofHours((long) 1), task2.getTotalEstTime());
+        assertEquals(Duration.ZERO, task2.getTotalActTime());
         assertFalse(task2.isDone());
         assertEquals("pre-read", task2.getName());
         assertEquals("CHEM-123//homework/ch1", task2.getParentPath());
         assertEquals("CHEM-123", task2.getSubjectName());
 
         assertEquals("CHEM-123//register", task3.getPath());
-        assertEquals(Duration.ofMinutes((long) 15), task3.getEstTime());
-        assertEquals(Duration.ZERO, task3.getActTime());
+        assertEquals(Duration.ofMinutes((long) 15), task3.getTotalEstTime());
+        assertEquals(Duration.ZERO, task3.getTotalActTime());
         assertFalse(task3.isDone());
         assertEquals("register", task3.getName());
         assertEquals(null, task3.getParentPath());
@@ -73,13 +73,13 @@ public class TestTask {
 
     @Test
     void testAddActTime() {
-        assertEquals(Duration.ZERO, task1.getActTime()); // init
+        assertEquals(Duration.ZERO, task1.getTotalActTime()); // init
         task1.addActTime(Duration.ofHours(1)); // first add
-        assertEquals(Duration.ofMinutes(60), task1.getActTime());
+        assertEquals(Duration.ofMinutes(60), task1.getTotalActTime());
         task1.addActTime(Duration.ofHours(2)); // second add
-        assertEquals(Duration.ofMinutes(180), task1.getActTime());
+        assertEquals(Duration.ofMinutes(180), task1.getTotalActTime());
         task1.addActTime(Duration.ofMinutes(15)); // third add
-        assertEquals(Duration.ofMinutes(195), task1.getActTime());
+        assertEquals(Duration.ofMinutes(195), task1.getTotalActTime());
     }
 
     // test NodeLike
@@ -156,22 +156,22 @@ public class TestTask {
 
     @Test
     void testUpdateEstTime() {
-        assertEquals(Duration.ofHours(6), task0.getEstTime()); // init
+        assertEquals(Duration.ofHours(6), task0.getTotalEstTime()); // init
         task0.updateEstTime(); // no child update
-        assertEquals(Duration.ofHours(6), task0.getEstTime());
+        assertEquals(Duration.ofHours(6), task0.getTotalEstTime());
         try {
             task0.addTask(task1); // add task 1 into 0
             task0.updateEstTime(); // have child update
-            assertEquals(Duration.ofHours(3), task0.getEstTime());
+            assertEquals(Duration.ofHours(3), task0.getTotalEstTime());
             task0.addTask(task4); // add task 4 into 0
             task0.updateEstTime(); // have child update
-            assertEquals(Duration.ofHours(5), task0.getEstTime());
+            assertEquals(Duration.ofHours(5), task0.getTotalEstTime());
             task1.addTask(task5); // task 1 get subtask
-            assertEquals(Duration.ofHours(1), task1.getEstTime());
-            assertEquals(Duration.ofHours(4), task0.getEstTime());
+            assertEquals(Duration.ofHours(1), task1.getTotalEstTime());
+            assertEquals(Duration.ofHours(4), task0.getTotalEstTime());
             task1.addTask(task6); // task 1 get another subtask
-            assertEquals(Duration.ofHours(2), task1.getEstTime());
-            assertEquals(Duration.ofHours(5), task0.getEstTime());
+            assertEquals(Duration.ofHours(2), task1.getTotalEstTime());
+            assertEquals(Duration.ofHours(5), task0.getTotalEstTime());
 
         } catch (Exception e) { // catch addTask
             fail();
@@ -182,31 +182,31 @@ public class TestTask {
     @SuppressWarnings("methodlength")
     @Test
     void testUpdateActTime() {
-        assertEquals(Duration.ofHours(0), task0.getActTime()); // init
+        assertEquals(Duration.ofHours(0), task0.getTotalActTime()); // init
         task0.updateActTime(); // no child update
-        assertEquals(Duration.ofHours(0), task0.getActTime());
+        assertEquals(Duration.ofHours(0), task0.getTotalActTime());
         try {
             task0.addTask(task1); // add task 1 into 0
             task1.addActTime(Duration.ofMinutes(25)); // time task 1
             task0.updateActTime(); // have child update
-            assertEquals(Duration.ofMinutes(25), task0.getActTime());
+            assertEquals(Duration.ofMinutes(25), task0.getTotalActTime());
             task4.addActTime(Duration.ofMinutes(100)); // time task 4
             task0.addTask(task4); // add task 4 into 0
             task0.updateActTime(); // have child update
-            assertEquals(Duration.ofMinutes(125), task0.getActTime());
+            assertEquals(Duration.ofMinutes(125), task0.getTotalActTime());
 
             task1.addTask(task5); // task 1 get subtask
-            assertEquals(Duration.ofMinutes(0), task1.getActTime()); // because subtask as time=0 
-            assertEquals(Duration.ofMinutes(100), task0.getActTime());
+            assertEquals(Duration.ofMinutes(0), task1.getTotalActTime()); // because subtask as time=0 
+            assertEquals(Duration.ofMinutes(100), task0.getTotalActTime());
             task5.addActTime(Duration.ofMinutes(20)); // time task 5
-            assertEquals(Duration.ofMinutes(20), task1.getActTime()); 
-            assertEquals(Duration.ofMinutes(120), task0.getActTime());
+            assertEquals(Duration.ofMinutes(20), task1.getTotalActTime()); 
+            assertEquals(Duration.ofMinutes(120), task0.getTotalActTime());
             task1.addTask(task6); // task 1 get another subtask
-            assertEquals(Duration.ofMinutes(20), task1.getActTime()); // time stays
-            assertEquals(Duration.ofMinutes(120), task0.getActTime());
+            assertEquals(Duration.ofMinutes(20), task1.getTotalActTime()); // time stays
+            assertEquals(Duration.ofMinutes(120), task0.getTotalActTime());
             task6.addActTime(Duration.ofMinutes(50)); // time task 6
-            assertEquals(Duration.ofMinutes(70), task1.getActTime()); 
-            assertEquals(Duration.ofMinutes(170), task0.getActTime());
+            assertEquals(Duration.ofMinutes(70), task1.getTotalActTime()); 
+            assertEquals(Duration.ofMinutes(170), task0.getTotalActTime());
 
         } catch (Exception e) { // catch addTask
             fail();
