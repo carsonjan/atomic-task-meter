@@ -48,7 +48,6 @@ public class ATM {
     public void makeProject(String name) {
         Project project = new Project(name);
         projects.put(name, project);
-        // stub
     }
 
     // /*
@@ -65,7 +64,7 @@ public class ATM {
      *         return null if not founded
      */
     public Project findProject(String name) {
-        return projects.get(name); // stub
+        return projects.get(name);
     }
 
     // /*
@@ -83,7 +82,7 @@ public class ATM {
      *         return null if not founded
      */
     public Project removeProject(String name) {
-        return projects.remove(name); // stub
+        return projects.remove(name);
     }
 
     // /*
@@ -92,7 +91,7 @@ public class ATM {
     //  *         return null if not founded
     //  */
     // public Agenda removeAgenda(String dateString) {
-    //     return null; // stub
+    //     return null;
     // }
 
     /*
@@ -104,7 +103,6 @@ public class ATM {
     public void makeTask(String projectName, String taskName, double estTime) {
         Task task = new Task(projectName + "//" + taskName, estTime);
         findProject(projectName).addTask(task);
-        // stub
     }
 
     /*
@@ -114,7 +112,7 @@ public class ATM {
      *          returns null if task not found
      */
     public Task findTask(String projectName, String taskName) {
-        return findProject(projectName).findTask(projectName + "//" + taskName); // stub
+        return findProject(projectName).findTask(projectName + "//" + taskName);
     }
 
     /*
@@ -128,7 +126,7 @@ public class ATM {
         Project project = findProject(projectName);
         Task task = project.findTask(projectName + "//" + taskName);
         project.removeTask(projectName + "//" + taskName);
-        return task; // stub
+        return task;
     }
 
     /*
@@ -162,7 +160,7 @@ public class ATM {
         double deltaH = delta.toMinutes() / 60.0;
         currentTask = null;
         lastStartTime = null;
-        return Math.round(deltaH * 100) / 100.0; // stub
+        return Math.round(deltaH * 100) / 100.0;
     }
 
     // /*
@@ -191,7 +189,6 @@ public class ATM {
     public void updateProjectTime(String projectName) {
         findProject(projectName).updateTotalEstTime();
         findProject(projectName).updateTotalActTime();
-        // stub
     }
 
     // /*

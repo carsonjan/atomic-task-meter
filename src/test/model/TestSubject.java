@@ -7,7 +7,7 @@ import java.time.Duration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+// Tests for Subject and NodeLike abstract class
 public class TestSubject {
 
     private Project subject1;

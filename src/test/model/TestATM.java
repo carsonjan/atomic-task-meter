@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 // import exceptions.DuplicateNameException;
 // import exceptions.NameNotExistException;
 
+// Tests for ATM
 public class TestATM {
     private ATM atm1;
 

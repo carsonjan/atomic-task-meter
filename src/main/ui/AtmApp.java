@@ -6,6 +6,7 @@ import model.Task;
 
 import java.util.Scanner;
 
+// The running application ui
 public class AtmApp {
     private ATM atm; // the atm model
     private Scanner scanner;
@@ -47,9 +48,7 @@ public class AtmApp {
                 processProjects();
                 break;
             case "a": // all agendas
-                System.out.println("- function under construction, stayed tuned! -"); // stub
-                // showAgendas();
-                // processAgendas();
+                System.out.println("- function under construction, stayed tuned! -");
                 break;
             default:
                 System.out.println("- invalid function -\n- type p, a, or q -");
@@ -76,7 +75,7 @@ public class AtmApp {
             showProjects();
             processProjects();
         } else if (projectName.equals("//b")) {
-            // showMenu();
+            // pass
         } else {
             Project project = atm.findProject(projectName);
             if (project == null) {
@@ -221,8 +220,7 @@ public class AtmApp {
         System.out.println("\t3: start timing task");
         System.out.println("\t4: stop timing task");
         System.out.println("\tdelete: delete task");
-        System.out.println("\tb: back to project"); //TODO goes to agendas
-        // stub
+        System.out.println("\tb: back to project");
     }
 
     // EFFECTS: process user input in a task stage, return if to go back
@@ -246,7 +244,7 @@ public class AtmApp {
                     System.out.println("> task is already undone before marking");
                 }
                 return true;
-            case "3": //TODO atm start task 142 null pointer
+            case "3":
                 String current = atm.startTask(task);
                 if (current == null) {
                     System.out.println("> start timing: " + task.getName());

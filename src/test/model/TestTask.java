@@ -7,6 +7,7 @@ import java.time.Duration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// Tests for task
 public class TestTask {
 
     private Task task1;
