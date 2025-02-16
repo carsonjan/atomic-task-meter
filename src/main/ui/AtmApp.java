@@ -26,7 +26,9 @@ public class AtmApp {
 
     // EFFECT: show the menu (quit, projects, agendas)
     private void showMenu() {
-        System.out.println("\n\tp: show all projects");
+        System.out.println("\n------------------");
+        System.out.println("\n\tMENU");
+        System.out.println("\tp: show all projects");
         System.out.println("\ta: show all agendas");
         System.out.println("\tquit: quit application");
         System.out.println("\nchoose function:");
@@ -36,41 +38,50 @@ public class AtmApp {
     private void processMenu() {
         input = scanner.nextLine().trim();
         switch (input) {
-            case "quit": // quit
+            case "quit":
+                System.out.println("== Thank you for using! ==");
                 quit = true;
+                break;
             case "p": // all projects
                 showProjects();
                 processProjects();
+                break;
             case "a": // all agendas
                 System.out.println("- function under construction, stayed tuned! -"); // stub
                 // showAgendas();
                 // processAgendas();
+                break;
             default:
-                System.out.println("- invalid command -\n- type p, a, or q -");
+                System.out.println("- invalid function -\n- type p, a, or q -");
         }
     }
 
     // EFFECTS: show all the projects
     private void showProjects() {
-        System.out.println("\nProject Name\tEstimated Time/Actual Time (h)\n");
+        System.out.println("\n----------------------");
+        System.out.println("\nProject Name\tActual Time/Estimated Time (h)\n");
         for (Project p : atm.getProjects().values()) {
-            String line = p.getName() + "\t(" + p.getTotalEstTime() + "/" + p.getTotalActTime() + ")";
+            atm.updateProjectTime(p.getName());
+            String line = p.getName() + "\t(" + atm.formatTime(p.getTotalActTime()) + "/" + atm.formatTime(p.getTotalEstTime()) + ")";
             System.out.println(line);
         }
     }
 
     // EFFECTS: process user input in the projects stage
     private void processProjects() {
-        System.out.println("\nType project name to select\nor //new to make new project");
+        System.out.println("\n\tType project name to select\n\tType //new to make new project\n\tType //b to go back to menu");
         String projectName = scanner.nextLine().trim();
         if (projectName.equals("//new")) {
-            makeProject();
+            makeProject(); 
             showProjects();
             processProjects();
+        } else if (projectName.equals("//b")) {
+            // showMenu();
         } else {
             Project project = atm.findProject(projectName);
             if (project == null) {
                 System.out.println("- project not found -");
+                showProjects();
                 processProjects();
             } else {
                 showProject(project);
@@ -86,6 +97,9 @@ public class AtmApp {
         if (projectName.contains("//")) {
             System.out.println("- Project name cannot contain // -");
             makeProject();
+        } else if (projectName.isEmpty()) {
+            System.out.println("- Project name cannot be empty -");
+            makeProject();  
         } else if (atm.getProjects().containsKey(projectName)) {
             System.out.println("- Project name must be unique -");
             makeProject();
@@ -110,6 +124,10 @@ public class AtmApp {
 
     // EFFECTS: show all task in a project
     private void showProject(Project project) {
+        System.out.println("\n----------------------");
+        atm.updateProjectTime(project.getName());
+        String pLine = project.getName() + "\t(" + atm.formatTime(project.getTotalActTime()) + "/" + atm.formatTime(project.getTotalEstTime()) + ")";
+        System.out.println("Tasks in:\t" + pLine);
         System.out.println("\nDone?\tTask Name\tActual Time/Estimated Time (h)\n");
         String done;
         for (Task t : project.getTasks().values()) {
@@ -118,20 +136,26 @@ public class AtmApp {
             } else {
                 done = "[ ] ";
             }
-            String line = done + t.getName() + "\t(" + t.getActTime() + "/" + t.getEstTime() + ")";
+            String line = done + t.getName() + "\t(" + atm.formatTime(t.getActTime()) + "/" + atm.formatTime(t.getEstTime()) + ")";
             System.out.println(line);
         }
-        System.out.println("\nType task name to select\nor //new to make new task");
+        System.out.println("\n\tType task name to select\n\tType //new to make new task\n\tType //b to go back to projects");
         
     }
 
     // EFFECTS: process user input in a project stage
     private void processProject(Project project) {
-        String taskName = scanner.nextLine().trim();
+        String taskName = "";
+        while (taskName.equals("")) {
+            taskName = scanner.nextLine().trim();
+        }
         boolean back = false;
         if (taskName.equals("//new")) {
             makeTask(project);
             back = true;
+        } else if (taskName.equals("//b")) {
+            showProjects();
+            processProjects();
         } else {
             Task task = atm.findTask(project.getName(), taskName);
             if (task == null) {
@@ -157,6 +181,9 @@ public class AtmApp {
         if (taskName.contains("//")) {
             System.out.println("- Task name cannot contain // -");
             makeTask(project);
+        } else if (taskName.isEmpty()) {
+            System.out.println("- Task name cannot be empty -");
+            makeTask(project);
         } else if (project.getTasks().containsKey(project.getName() + "//" + taskName)) {
             System.out.println("- Task name must be unique -");
             makeTask(project);
@@ -180,20 +207,21 @@ public class AtmApp {
 
     // EFFECTS: show actions for a task
     private void showTask(Task t) {
+        System.out.println("\n----------------------");
         String done;
         if (t.getIsDone()) {
             done = "[x] ";
         } else {
             done = "[ ] ";
         }
-        String line = done + t.getName() + "\t(" + t.getActTime() + "/" + t.getEstTime() + ")";
-        System.out.println("\n" + line);
+        String line = done + t.getName() + "\t(" + atm.formatTime(t.getActTime()) + "/" + atm.formatTime(t.getEstTime()) + ")";
+        System.out.println(line + "\n");
         System.out.println("\t1: mark task done");
         System.out.println("\t2: mark task undone");
         System.out.println("\t3: start timing task");
         System.out.println("\t4: stop timing task");
         System.out.println("\tdelete: delete task");
-        System.out.println("\tb: back to project");
+        System.out.println("\tb: back to project"); //TODO goes to agendas
         // stub
     }
 
@@ -221,7 +249,7 @@ public class AtmApp {
             case "3": //TODO atm start task 142 null pointer
                 String current = atm.startTask(task);
                 if (current == null) {
-                    System.out.println("start timing: " + task.getName());
+                    System.out.println("> start timing: " + task.getName());
                 } else {
                     System.out.println("- currently timing " + current + " -");
                     System.out.println("- cannot time two tasks simultaneously -");
@@ -230,14 +258,15 @@ public class AtmApp {
             case "4":
                 Double addTime = atm.stopTask(task);
                 if (addTime == null) {
-                    System.out.println("- no task currently timing -");
+                    System.out.println("- task not currently timing -");
                 } else {
-                    System.out.println("stopped timing: " + task.getName());
-                    System.out.println("Accumulated an extra" + addTime + "hours");
+                    System.out.println("> stopped timing: " + task.getName());
+                    System.out.println("> Accumulated an extra" + addTime + "hours");
                 }
                 return true;
             case "delete":
-                atm.removeTask(task.getProjectName(), task.getName()); //TODO not removing
+                Task delResult = atm.removeTask(task.getProjectName(), task.getName());
+                System.out.println("> removed task: " + delResult.getName());
                 return true;
             case "b":
                 return true;
