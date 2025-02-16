@@ -61,14 +61,18 @@ public class AtmApp {
         System.out.println("\nProject Name\tActual Time/Estimated Time (h)\n");
         for (Project p : atm.getProjects().values()) {
             atm.updateProjectTime(p.getName());
-            String line = p.getName() + "\t(" + atm.formatTime(p.getTotalActTime()) + "/" + atm.formatTime(p.getTotalEstTime()) + ")";
+            Double actNum = atm.formatTime(p.getTotalActTime());
+            Double estNum = atm.formatTime(p.getTotalEstTime());
+            String line = p.getName() + "\t(" + actNum + "/" + estNum + ")";
             System.out.println(line);
         }
     }
 
     // EFFECTS: process user input in the projects stage
     private void processProjects() {
-        System.out.println("\n\tType project name to select\n\tType //new to make new project\n\tType //b to go back to menu");
+        System.out.println("\n\tType project name to select");
+        System.out.println("\tType //new to make new project");
+        System.out.println("\tType //b to go back to menu");
         String projectName = scanner.nextLine().trim();
         if (projectName.equals("//new")) {
             makeProject(); 
@@ -125,8 +129,10 @@ public class AtmApp {
     private void showProject(Project project) {
         System.out.println("\n----------------------");
         atm.updateProjectTime(project.getName());
-        String pLine = project.getName() + "\t(" + atm.formatTime(project.getTotalActTime()) + "/" + atm.formatTime(project.getTotalEstTime()) + ")";
-        System.out.println("Tasks in:\t" + pLine);
+        Double actNum = atm.formatTime(project.getTotalActTime());
+        Double estNum = atm.formatTime(project.getTotalEstTime());
+        String projectNameLine = project.getName() + "\t(" + actNum + "/" + estNum + ")";
+        System.out.println("Tasks in:\t" + projectNameLine);
         System.out.println("\nDone?\tTask Name\tActual Time/Estimated Time (h)\n");
         String done;
         for (Task t : project.getTasks().values()) {
@@ -135,14 +141,20 @@ public class AtmApp {
             } else {
                 done = "[ ] ";
             }
-            String line = done + t.getName() + "\t(" + atm.formatTime(t.getActTime()) + "/" + atm.formatTime(t.getEstTime()) + ")";
+            Double actNumLine = atm.formatTime(t.getActTime());
+            Double estNumLine = atm.formatTime(t.getEstTime());
+            String line = done + t.getName() + "\t(" + actNumLine + "/" + estNumLine + ")";
             System.out.println(line);
         }
-        System.out.println("\n\tType task name to select\n\tType //new to make new task\n\tType //b to go back to projects");
+        System.out.println("\n\tType task name to select");
+        System.out.println("\tType //new to make new task");
+        System.out.println("\tType //delete to delete current project (and all it's tasks)");
+        System.out.println("\tType //b to go back to projects");
         
     }
 
     // EFFECTS: process user input in a project stage
+    @SuppressWarnings("methodlength")
     private void processProject(Project project) {
         String taskName = "";
         while (taskName.equals("")) {
@@ -153,6 +165,10 @@ public class AtmApp {
             makeTask(project);
             back = true;
         } else if (taskName.equals("//b")) {
+            showProjects();
+            processProjects();
+        } else if (taskName.equals("//delete")) {
+            atm.removeProject(project.getName());
             showProjects();
             processProjects();
         } else {
@@ -213,7 +229,9 @@ public class AtmApp {
         } else {
             done = "[ ] ";
         }
-        String line = done + t.getName() + "\t(" + atm.formatTime(t.getActTime()) + "/" + atm.formatTime(t.getEstTime()) + ")";
+        Double estNum = atm.formatTime(t.getActTime());
+        Double actNum = atm.formatTime(t.getEstTime());
+        String line = done + t.getName() + "\t(" + actNum + "/" + estNum + ")";
         System.out.println(line + "\n");
         System.out.println("\t1: mark task done");
         System.out.println("\t2: mark task undone");
