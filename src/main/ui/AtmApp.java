@@ -229,8 +229,8 @@ public class AtmApp {
         } else {
             done = "[ ] ";
         }
-        Double estNum = atm.formatTime(t.getActTime());
-        Double actNum = atm.formatTime(t.getEstTime());
+        Double estNum = atm.formatTime(t.getEstTime());
+        Double actNum = atm.formatTime(t.getActTime());
         String line = done + t.getName() + "\t(" + actNum + "/" + estNum + ")";
         System.out.println(line + "\n");
         System.out.println("\t1: mark task done");
@@ -277,7 +277,7 @@ public class AtmApp {
                     System.out.println("- task not currently timing -");
                 } else {
                     System.out.println("> stopped timing: " + task.getName());
-                    System.out.println("> Accumulated an extra" + addTime + "hours");
+                    System.out.println("> Accumulated an extra " + addTime + "hours");
                 }
                 return true;
             case "delete":
