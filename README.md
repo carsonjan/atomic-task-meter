@@ -36,3 +36,5 @@ As a user, I want to be able to:
 2. read all subjects in the collection
 3. remove a subject from the collection
 4. mark a task as done
+5. stop the timing and save all current projects/tasks when I want to save and quit the program
+6. resume my saved projects/tasks when I enter the program and open my last save 
