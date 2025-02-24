@@ -30,6 +30,14 @@ public abstract class NodeLike {
         return tasks;
     }
 
+    public void setTotalEstTime(Duration duration) {
+        this.totalEstTime = duration;
+    }
+
+    public void setTotalActTime(Duration duration) {
+        this.totalActTime = duration;
+    }
+
     /*
      * REQUIRES: task not already in tasks
      * MODIFIES: this

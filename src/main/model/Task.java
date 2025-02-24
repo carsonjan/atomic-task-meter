@@ -30,6 +30,22 @@ public class Task {
         this.name = splitPath[1];
     }
 
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public void setActTime(Duration actTime) {
+        this.actTime = actTime;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPath() {
         return path;
     }

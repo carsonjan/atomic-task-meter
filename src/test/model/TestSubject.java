@@ -38,6 +38,22 @@ public class TestSubject {
 
     //Test NodeLike
     @Test
+    void setTotalEstTimeTest() {
+        subject1.setTotalEstTime(Duration.ofHours(3));
+        assertEquals(Duration.ofHours(3), subject1.getTotalEstTime());
+        subject1.setTotalEstTime(Duration.ofHours(5));
+        assertEquals(Duration.ofHours(5), subject1.getTotalEstTime());
+    }
+
+    @Test
+    void setTotalActTimeTest() {
+        subject1.setTotalActTime(Duration.ofHours(1));
+        assertEquals(Duration.ofHours(1), subject1.getTotalActTime());
+        subject1.setTotalActTime(Duration.ofHours(4));
+        assertEquals(Duration.ofHours(4), subject1.getTotalActTime());
+    }
+
+    @Test
     void addTaskTest() {
         subject1.addTask(task1);
         assertEquals(1, subject1.getTasks().size());

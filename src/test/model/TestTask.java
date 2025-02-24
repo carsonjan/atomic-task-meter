@@ -18,6 +18,38 @@ public class TestTask {
     }
 
     @Test
+    void setDoneTest() {
+        task1.setDone(true);
+        assertTrue(task1.getIsDone());
+        task1.setDone(false);
+        assertFalse(task1.getIsDone());
+    }
+
+    @Test
+    void setActTimeTest() {
+        task1.setActTime(Duration.ofHours(3));
+        assertEquals(Duration.ofHours(3), task1.getActTime());
+        task1.setActTime(Duration.ofHours(5));
+        assertEquals(Duration.ofHours(5), task1.getActTime());
+    }
+
+    @Test
+    void setProjectNameTest() {
+        task1.setProjectName("cs");
+        assertEquals("cs", task1.getProjectName());
+        task1.setProjectName("ds 100");
+        assertEquals("ds 100", task1.getProjectName());
+    }
+
+    @Test
+    void setNameTest() {
+        task1.setName("ch1");
+        assertEquals("ch1", task1.getName());
+        task1.setName("study MT2");
+        assertEquals("study MT2", task1.getName());
+    }
+
+    @Test
     void constructorTest() {
         assertEquals("cs 123//ch1", task1.getPath());
         assertFalse(task1.getIsDone());
