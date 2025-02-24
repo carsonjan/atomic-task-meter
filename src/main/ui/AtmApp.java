@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // The running application ui
@@ -228,9 +229,15 @@ public class AtmApp {
             makeTask(project);
         } else {
             System.out.println("\nEstimated time (h):");
-            double estTime = scanner.nextDouble();
-            atm.makeTask(projectName, taskName, estTime);
-            System.out.println("> made task " + taskName + " in " + projectName + "\t(" + estTime + " h)");
+            try {
+                Double estTime = scanner.nextDouble();
+                atm.makeTask(projectName, taskName, estTime);
+                System.out.println("> made task " + taskName + " in " + projectName + "\t(" + estTime + " h)");
+            } catch (InputMismatchException e) {
+                System.out.println("- Please input a number -");
+                makeTask(project);
+            }
+            
         }
     }
 
