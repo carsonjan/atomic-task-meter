@@ -8,6 +8,8 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 // The running application ui
@@ -40,6 +42,7 @@ public class AtmApp {
         System.out.println("\n\tMENU");
         System.out.println("\tp: show all projects");
         System.out.println("\ta: show all agendas");
+        System.out.println("\ts: show current status");
         System.out.println("\tsave: save file to " + JSON_STORE);
         System.out.println("\tload: read file from " + JSON_STORE);
         System.out.println("\tquit: quit application");
@@ -47,6 +50,7 @@ public class AtmApp {
     }
 
     // EFFECTS: process user input in menu stage
+    @SuppressWarnings("methodlength")
     private void processMenu() {
         input = scanner.nextLine().trim();
         switch (input) {
@@ -66,6 +70,9 @@ public class AtmApp {
                 break;
             case "load": // read
                 loadAtm();
+                break;
+            case "s": // status
+                System.out.println(getStatus());
                 break;
             default:
                 System.out.println("- invalid function -\n- type p, a, or q -");
@@ -337,5 +344,25 @@ public class AtmApp {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
+    }
+
+    // EFFECTS: return current task, last start time, and current save path
+    private String getStatus() {
+        String currentTaskString;
+        Task currentTask = atm.getCurrentTask();
+        if (currentTask != null) {
+            currentTaskString = "\nCurrently timing task:\t" + currentTask.getPath();
+        } else {
+            currentTaskString = "\nCurrently timing task:\t" + "(none)";
+        }
+        String lastStartString;
+        LocalDateTime lastStartTime = atm.getLastStartTime();
+        if (lastStartTime == null) {
+            lastStartString = "\nSince:\t(none)";
+        } else {
+            lastStartString = "\nSince:\t" + lastStartTime.format(DateTimeFormatter.ofPattern("HH:mm\tdd MMM yyyy"));
+        }
+        String savePathString = "\nSave files to:\t" + JSON_STORE;
+        return "\n----------" + currentTaskString + lastStartString + savePathString + "\n----------";
     }
 }
