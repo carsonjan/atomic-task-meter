@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 // Tests for Subject and NodeLike abstract class
-public class TestSubject {
+public class SubjectTest {
 
     private Project subject1;
     private Project subject2;

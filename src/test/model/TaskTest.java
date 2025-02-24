@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 // Tests for task
-public class TestTask {
+public class TaskTest {
 
     private Task task1;
 

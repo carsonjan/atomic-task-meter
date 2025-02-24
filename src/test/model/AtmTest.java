@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 // import exceptions.NameNotExistException;
 
 // Tests for ATM
-public class TestATM {
+public class AtmTest {
     private ATM atm1;
 
     @BeforeEach
@@ -33,6 +33,16 @@ public class TestATM {
         atm1.makeProject("cs 123");
         assertEquals(1, atm1.getProjects().size());
         assertNotNull(atm1.getProjects().get("cs 123"));
+    }
+
+    @Test
+    void addProjectTest() {
+        Project p1 = new Project("cpsc 210");
+        Project p2 = new Project("dsci 100");
+        atm1.addProject(p1);
+        assertEquals(1, atm1.getProjects().size());
+        atm1.addProject(p2);
+        assertEquals(2, atm1.getProjects().size());
     }
 
     @Test 
