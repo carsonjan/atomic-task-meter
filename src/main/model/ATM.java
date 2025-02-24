@@ -3,9 +3,13 @@ package model;
 import java.time.*;
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 
 // an Atomic Task Meter object
-public class ATM {
+public class ATM implements Writable {
     private HashMap<String, Project> projects; // project with its name as key
     // private HashMap<LocalDate, Agenda> agendas; // agenda with its date as key TODO
     private Task currentTask; // the task currently timing
@@ -48,6 +52,12 @@ public class ATM {
     public void makeProject(String name) {
         Project project = new Project(name);
         projects.put(name, project);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: add a project into projects
+    public void addProject(Project project) {
+        projects.put(project.getName(), project);
     }
 
     // /*
@@ -207,5 +217,13 @@ public class ATM {
         double hours = duration.toMinutes() / 60.0;
         return Math.floor(hours * 100) / 100;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("projects", projects);
+        return json;
+    }
+    
 
 }

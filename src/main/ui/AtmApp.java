@@ -3,7 +3,11 @@ package ui;
 import model.ATM;
 import model.Project;
 import model.Task;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // The running application ui
@@ -12,12 +16,17 @@ public class AtmApp {
     private Scanner scanner;
     private String input;
     private boolean quit;
+    private static final String JSON_STORE = "./data/atm.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: init and run the app
     public AtmApp() {
         atm = new ATM();
         quit = false;
         scanner = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
         while (!quit) {
             showMenu();
@@ -31,6 +40,8 @@ public class AtmApp {
         System.out.println("\n\tMENU");
         System.out.println("\tp: show all projects");
         System.out.println("\ta: show all agendas");
+        System.out.println("\tsave: save file to " + JSON_STORE);
+        System.out.println("\tload: read file from " + JSON_STORE);
         System.out.println("\tquit: quit application");
         System.out.println("\nchoose function:");
     }
@@ -49,6 +60,12 @@ public class AtmApp {
                 break;
             case "a": // all agendas
                 System.out.println("- function under construction, stayed tuned! -");
+                break;
+            case "save": // save
+                saveAtm();
+                break;
+            case "load": // read
+                loadAtm();
                 break;
             default:
                 System.out.println("- invalid function -\n- type p, a, or q -");
@@ -290,6 +307,35 @@ public class AtmApp {
                 System.out.println("- action not found -");
                 processTask(task);
                 return false;
+        }
+    }
+
+    // EFFECTS: saves the ATM object to file
+    private void saveAtm() {
+        Task currentTask = atm.getCurrentTask();
+        if (currentTask != null) {
+            Double addTime = atm.stopTask(currentTask);
+            System.out.println("> stopped timing: " + currentTask.getName());
+            System.out.println("> Accumulated an extra " + addTime + "hours");
+        }
+        try {
+            jsonWriter.open();
+            jsonWriter.write(atm);
+            jsonWriter.close();
+            System.out.println("Saved " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads atm from file
+    private void loadAtm() {
+        try {
+            atm = jsonReader.read();
+            System.out.println("Loaded " + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
