@@ -218,6 +218,7 @@ public class ATM implements Writable {
         return Math.floor(hours * 100) / 100;
     }
 
+    // EFFECTS: save projects field to the json file
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
