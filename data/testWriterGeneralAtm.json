@@ -1,0 +1,31 @@
+{"projects": {
+    "dsci 100": {
+        "totalActTime": "PT0S",
+        "name": "dsci 100",
+        "totalEstTime": "PT0S",
+        "tasks": {}
+    },
+    "cpsc 210": {
+        "totalActTime": "PT0S",
+        "name": "cpsc 210",
+        "totalEstTime": "PT0S",
+        "tasks": {
+            "cpsc 210//ch1 study": {
+                "path": "cpsc 210//ch1 study",
+                "name": "ch1 study",
+                "actTime": "PT0S",
+                "projectName": "cpsc 210",
+                "isDone": false,
+                "estTime": "PT2H"
+            },
+            "cpsc 210//ch2 study": {
+                "path": "cpsc 210//ch2 study",
+                "name": "ch2 study",
+                "actTime": "PT0S",
+                "projectName": "cpsc 210",
+                "isDone": false,
+                "estTime": "PT3H"
+            }
+        }
+    }
+}}
