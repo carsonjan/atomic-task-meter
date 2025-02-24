@@ -1,0 +1,38 @@
+{"projects": {
+    "math 101": {
+        "totalActTime": "PT0S",
+        "name": "math 101",
+        "totalEstTime": "PT4H",
+        "tasks": {"math 101//study mt": {
+            "path": "math 101//study mt",
+            "name": "study mt",
+            "actTime": "PT0S",
+            "projectName": "math 101",
+            "isDone": false,
+            "estTime": "PT4H"
+        }}
+    },
+    "cpsc 210": {
+        "totalActTime": "PT0S",
+        "name": "cpsc 210",
+        "totalEstTime": "PT4H",
+        "tasks": {
+            "cpsc 210//ch1": {
+                "path": "cpsc 210//ch1",
+                "name": "ch1",
+                "actTime": "PT0S",
+                "projectName": "cpsc 210",
+                "isDone": false,
+                "estTime": "PT2H"
+            },
+            "cpsc 210//ch2": {
+                "path": "cpsc 210//ch2",
+                "name": "ch2",
+                "actTime": "PT0S",
+                "projectName": "cpsc 210",
+                "isDone": false,
+                "estTime": "PT2H"
+            }
+        }
+    }
+}}
