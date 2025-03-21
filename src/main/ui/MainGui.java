@@ -3,6 +3,8 @@ package ui;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import ui.gui.MySplitPane;
+
 public class MainGui {
     public static void main(String[] args) {
         init();
