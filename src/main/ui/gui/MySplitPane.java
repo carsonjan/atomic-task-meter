@@ -16,8 +16,8 @@ public class MySplitPane extends JPanel {
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                                    projectPanel, taskPanel);
         splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(150);
-        splitPane.setPreferredSize(new Dimension(500, 300));
+        splitPane.setDividerLocation(250);
+        splitPane.setPreferredSize(new Dimension(700, 400));
         add(splitPane);
     }
 }
