@@ -15,8 +15,8 @@ public class MySplitPane extends JPanel {
 
     public MySplitPane(ATM data) {
         this.data = data;
-        projectPanel = new MyPanel("Projects", data);
-        taskPanel = new MyTaskPanel("Tasks for <Project Name>", data);
+        projectPanel = new MyPanel(this, "Projects", data);
+        taskPanel = new MyTaskPanel(this, "Tasks for <Project Name>", data);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                                    projectPanel, taskPanel);
         splitPane.setOneTouchExpandable(true);

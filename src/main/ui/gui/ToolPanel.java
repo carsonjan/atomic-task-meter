@@ -17,9 +17,11 @@ import javax.swing.JLabel;
 
 public class ToolPanel extends JPanel {
     
+    private MyPanel parent;
     private ATM data;
 
-    public ToolPanel(ATM data) {
+    public ToolPanel(MyPanel parent, ATM data) {
+        this.parent = parent;
         this.data = data;
 
         ImageIcon imgIcon = new ImageIcon("data/plusImage.png");

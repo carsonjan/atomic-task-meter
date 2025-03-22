@@ -10,12 +10,14 @@ import model.ATM;
 
 public class MyScrollPane extends JScrollPane {
 
+    private MyPanel parent;
     private ATM data;
     private JList list;
     private DefaultListModel listModel;
 
-    public MyScrollPane(ATM data) {
+    public MyScrollPane(MyPanel parent, ATM data) {
 
+        this.parent = parent;
         this.data = data;
         
         // stub
