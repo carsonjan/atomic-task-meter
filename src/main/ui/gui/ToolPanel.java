@@ -115,6 +115,7 @@ public class ToolPanel extends JPanel {
             }
 
             listModel.insertElementAt(itemName.getText(), index);
+            // data.makeProject(itemName.getText()); TODO this can add project, but add task also add project
             //If we just wanted to add to the end, we'd do this:
             //listModel.addElement(employeeName.getText());
 
