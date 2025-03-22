@@ -36,4 +36,12 @@ public class MyScrollPane extends JScrollPane {
     public MyPanel getMyParent() {
         return (MyPanel) getParent();
     }
+
+    public JList getList() {
+        return list;
+    }
+
+    public DefaultListModel getListModel() {
+        return listModel;
+    }
 }

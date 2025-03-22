@@ -34,4 +34,12 @@ public class MyPanel extends JPanel {
         return (MySplitPane) getParent();
     }
 
+    public MyScrollPane getItemPane() {
+        return itemPane;
+    }
+
+    public ToolPanel getToolPanel() {
+        return toolPanel;
+    }
+
 }
