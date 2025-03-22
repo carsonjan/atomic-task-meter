@@ -9,7 +9,7 @@ import javax.swing.JMenuItem;
 
 import model.ATM;
 import ui.gui.MySplitPane;
-import ui.gui.MenuBar;
+import ui.gui.MyMenuBar;
 
 public class MainGui {
 
@@ -23,10 +23,10 @@ public class MainGui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ATM data = new ATM();
-        JComponent newContentPane = new MySplitPane(data);
+        MySplitPane newContentPane = new MySplitPane(data);
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
-        JMenuBar menuBar = new MenuBar(data);
+        MyMenuBar menuBar = new MyMenuBar(data, newContentPane);
         frame.setJMenuBar(menuBar);
 
         frame.pack();

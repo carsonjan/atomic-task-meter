@@ -24,4 +24,12 @@ public class MySplitPane extends JPanel {
         splitPane.setPreferredSize(new Dimension(700, 400));
         add(splitPane);
     }
+
+    public MyPanel getProjectPanel() {
+        return projectPanel;
+    }
+
+    public MyTaskPanel getTaskPanel() {
+        return taskPanel;
+    }
 }

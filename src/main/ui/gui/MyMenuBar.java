@@ -13,17 +13,19 @@ import model.Task;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-public class MenuBar extends JMenuBar implements ActionListener {
+public class MyMenuBar extends JMenuBar implements ActionListener {
     
     private ATM data;
+    private MySplitPane mySplitPane;
     private static final String JSON_STORE = "./data/atm.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     // make menu bar
-    public MenuBar(ATM data) {
+    public MyMenuBar(ATM data, MySplitPane mySplitPane) {
         super();
         this.data = data;
+        this.mySplitPane = mySplitPane; // neighbor
         this.jsonWriter = new JsonWriter(JSON_STORE);
         this.jsonReader = new JsonReader(JSON_STORE);
 
