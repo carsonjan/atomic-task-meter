@@ -10,13 +10,13 @@ import model.ATM;
 public class MySplitPane extends JPanel {
     private ATM data;
     private JSplitPane splitPane;
-    private JPanel projectPanel;
-    private JPanel taskPanel;
+    private MyPanel projectPanel;
+    private MyTaskPanel taskPanel;
 
     public MySplitPane(ATM data) {
         this.data = data;
-        projectPanel = new MyPanel(this, "Projects", data);
-        taskPanel = new MyTaskPanel(this, "Tasks for <Project Name>", data);
+        projectPanel = new MyPanel("Projects", data);
+        taskPanel = new MyTaskPanel("Tasks for <Project Name>", data);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                                    projectPanel, taskPanel);
         splitPane.setOneTouchExpandable(true);

@@ -17,11 +17,9 @@ import javax.swing.JLabel;
 
 public class ToolPanel extends JPanel {
     
-    private MyPanel parent;
     private ATM data;
 
-    public ToolPanel(MyPanel parent, ATM data) {
-        this.parent = parent;
+    public ToolPanel(ATM data) {
         this.data = data;
 
         ImageIcon imgIcon = new ImageIcon("data/plusImage.png");
@@ -63,5 +61,9 @@ public class ToolPanel extends JPanel {
         Image img = icon.getImage();  
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);  
         return new ImageIcon(resizedImage);
+    }
+
+    public MyPanel getMyParent() {
+        return (MyPanel) getParent();
     }
 }

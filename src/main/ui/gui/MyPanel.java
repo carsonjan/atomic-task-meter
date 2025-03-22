@@ -12,21 +12,26 @@ import model.ATM;
 public class MyPanel extends JPanel {
 
     private ATM data;
-    private MySplitPane parent;
+    private MyScrollPane itemPane;
+    private ToolPanel toolPanel;
 
-    public MyPanel(MySplitPane parent, String title, ATM data) {
+    
+    public MyPanel(String title, ATM data) {
         super(new BorderLayout());
-        this.parent = parent;
         this.data = data;
         
         JLabel titleLabel = new JLabel(title);
         add(titleLabel, BorderLayout.NORTH);
         
-        JScrollPane itemPane = new MyScrollPane(this, data);
+        itemPane = new MyScrollPane(data);
         add(itemPane, BorderLayout.CENTER);
 
-        JPanel toolPanel = new ToolPanel(this, data);
+        toolPanel = new ToolPanel(data);
         add(toolPanel, BorderLayout.SOUTH);
+    }
+
+    public MySplitPane getMyParent() {
+        return (MySplitPane) getParent();
     }
 
 }

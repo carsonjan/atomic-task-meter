@@ -5,7 +5,7 @@ import javax.swing.JSplitPane;
 import model.ATM;
 
 public class MyTaskPanel extends MyPanel {
-    public MyTaskPanel(MySplitPane parent, String title, ATM data) {
-        super(parent, title, data);
+    public MyTaskPanel(String title, ATM data) {
+        super(title, data);
     }
 }
