@@ -6,6 +6,9 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.ATM;
+
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,7 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class ToolPanel extends JPanel {
-    public ToolPanel() {
+    
+    private ATM data;
+
+    public ToolPanel(ATM data) {
+        this.data = data;
 
         ImageIcon imgIcon = new ImageIcon("data/plusImage.png");
         imgIcon = (ImageIcon) resizeIcon(imgIcon, 15, 15);

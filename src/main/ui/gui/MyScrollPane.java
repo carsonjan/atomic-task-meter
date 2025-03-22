@@ -6,13 +6,18 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import model.ATM;
+
 public class MyScrollPane extends JScrollPane {
 
+    private ATM data;
     private JList list;
     private DefaultListModel listModel;
 
-    public MyScrollPane() {
+    public MyScrollPane(ATM data) {
 
+        this.data = data;
+        
         // stub
         listModel = new DefaultListModel();
         listModel.addElement("Jane Doe");

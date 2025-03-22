@@ -7,9 +7,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import model.ATM;
 import ui.gui.MySplitPane;
 
 public class MainGui {
+
     public static void main(String[] args) {
         init();
     }
@@ -19,7 +21,7 @@ public class MainGui {
         JFrame frame = new JFrame("Atomic Task Meter (GUI)");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JComponent newContentPane = new MySplitPane();
+        JComponent newContentPane = new MySplitPane(new ATM());
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
         frame.setJMenuBar(makeMenuBar());

@@ -5,14 +5,18 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import model.ATM;
+
 public class MySplitPane extends JPanel {
+    private ATM data;
     private JSplitPane splitPane;
     private JPanel projectPanel;
     private JPanel taskPanel;
 
-    public MySplitPane() {
-        projectPanel = new MyPanel("Projects");
-        taskPanel = new MyTaskPanel("Tasks for <Project Name>");
+    public MySplitPane(ATM data) {
+        this.data = data;
+        projectPanel = new MyPanel("Projects", data);
+        taskPanel = new MyTaskPanel("Tasks for <Project Name>", data);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                                    projectPanel, taskPanel);
         splitPane.setOneTouchExpandable(true);
