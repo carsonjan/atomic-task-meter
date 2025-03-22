@@ -59,4 +59,12 @@ public class MyScrollPane extends JScrollPane implements ListSelectionListener {
             }
         }
     }
+
+    // clear current list, put all elements into list
+    public void updateElements(Object[] oList) {
+        listModel.clear();
+        for (Object o : oList) {
+            listModel.addElement(o);
+        }
+    }
 }

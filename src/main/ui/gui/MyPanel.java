@@ -42,4 +42,8 @@ public class MyPanel extends JPanel {
         return toolPanel;
     }
 
+    public void updateElements(Object[] oList) {
+        itemPane.updateElements(oList);
+    }
+
 }
