@@ -1,0 +1,31 @@
+{"projects": {
+    "cs": {
+        "totalActTime": "PT0S",
+        "name": "cs",
+        "totalEstTime": "PT5H",
+        "tasks": {
+            "cs//ch2": {
+                "path": "cs//ch2",
+                "name": "ch2",
+                "actTime": "PT0S",
+                "projectName": "cs",
+                "isDone": false,
+                "estTime": "PT3H"
+            },
+            "cs//ch1": {
+                "path": "cs//ch1",
+                "name": "ch1",
+                "actTime": "PT1M28.651695S",
+                "projectName": "cs",
+                "isDone": false,
+                "estTime": "PT2H"
+            }
+        }
+    },
+    "ds": {
+        "totalActTime": "PT0S",
+        "name": "ds",
+        "totalEstTime": "PT0S",
+        "tasks": {}
+    }
+}}
