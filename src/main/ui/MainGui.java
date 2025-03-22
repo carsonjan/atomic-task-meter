@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 
 import model.ATM;
 import ui.gui.MySplitPane;
+import ui.gui.MenuBar;
 
 public class MainGui {
 
@@ -21,32 +22,15 @@ public class MainGui {
         JFrame frame = new JFrame("Atomic Task Meter (GUI)");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JComponent newContentPane = new MySplitPane(new ATM());
+        ATM data = new ATM();
+        JComponent newContentPane = new MySplitPane(data);
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
-        frame.setJMenuBar(makeMenuBar());
+        JMenuBar menuBar = new MenuBar(data);
+        frame.setJMenuBar(menuBar);
 
         frame.pack();
         frame.setVisible(true);
     }
 
-    // make menu bar
-    private static JMenuBar makeMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu file = new JMenu("File");
-        JMenuItem save = new JMenuItem("Save");
-        JMenuItem load = new JMenuItem("Load");
-        file.add(save);
-        file.add(load);
-        menuBar.add(file);
-
-        JMenu about = new JMenu("About");
-        JMenuItem aboutItem = new JMenuItem("About");
-        about.add(aboutItem);
-        menuBar.add(about);
-        
-        menuBar.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
-        return menuBar;
-    }
 }
