@@ -1,14 +1,12 @@
 package ui.gui;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 import model.ATM;
 
-public class MyScrollPane extends JScrollPane {
+public class MyScrollPane extends JScrollPane implements ListSelectionListener {
 
     private ATM data;
     private JList list;
@@ -43,5 +41,22 @@ public class MyScrollPane extends JScrollPane {
 
     public DefaultListModel getListModel() {
         return listModel;
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+
+            JButton rmButton = getMyParent().getToolPanel().getRmButton();
+
+            if (list.getSelectedIndex() == -1) {
+            //No selection, disable fire button.
+                rmButton.setEnabled(false);
+
+            } else {
+            //Selection, enable the fire button.
+                rmButton.setEnabled(true);
+            }
+        }
     }
 }

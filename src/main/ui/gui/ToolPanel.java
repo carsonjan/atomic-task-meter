@@ -1,23 +1,17 @@
 package ui.gui;
 
-import java.awt.Color;
-import java.io.File;
-import java.awt.Image;
-
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 import model.ATM;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+
 
 public class ToolPanel extends JPanel {
     
     private ATM data;
+    private JButton rmButton;
 
     public ToolPanel(ATM data) {
         this.data = data;
@@ -37,8 +31,8 @@ public class ToolPanel extends JPanel {
         // addButton.addActionListener(hireListener);
         // addButton.setEnabled(false);
 
-        JButton rmButton = new JButton("🗑️");
-        // more ...
+        rmButton = new JButton("🗑️");
+        rmButton.addActionListener(new RmListener());
 
         JTextField itemName = new JTextField(10);
         // itemName.addActionListener(hireListener);
@@ -65,5 +59,37 @@ public class ToolPanel extends JPanel {
 
     public MyPanel getMyParent() {
         return (MyPanel) getParent();
+    }
+
+    public JButton getRmButton() {
+        return rmButton;
+    }
+
+    class RmListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //This method can be called only if
+            //there's a valid selection
+            //so go ahead and remove whatever's selected.
+            MyScrollPane itemPane = getMyParent().getItemPane();
+            JList list = itemPane.getList();
+            DefaultListModel listModel = itemPane.getListModel();
+            int index = list.getSelectedIndex();
+            listModel.remove(index);
+
+            int size = listModel.getSize();
+
+            if (size == 0) { //Nobody's left, disable firing.
+                rmButton.setEnabled(false);
+
+            } else { //Select an index.
+                if (index == listModel.getSize()) {
+                    //removed item in last position
+                    index--;
+                }
+
+                list.setSelectedIndex(index);
+                list.ensureIndexIsVisible(index);
+            }
+        }
     }
 }
