@@ -1,6 +1,7 @@
 package ui.gui;
 
 import java.awt.BorderLayout;
+import java.util.Collection;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -42,7 +43,7 @@ public class MyPanel extends JPanel {
         return toolPanel;
     }
 
-    public void updateElements(Object[] oList) {
+    public void updateElements(Collection oList) {
         itemPane.updateElements(oList);
     }
 

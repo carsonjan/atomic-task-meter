@@ -16,16 +16,16 @@ import persistence.JsonWriter;
 public class MyMenuBar extends JMenuBar implements ActionListener {
     
     private ATM data;
-    private MySplitPane mySplitPane;
+    private MainFrame parent;
     private static final String JSON_STORE = "./data/atm.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     // make menu bar
-    public MyMenuBar(ATM data, MySplitPane mySplitPane) {
+    public MyMenuBar(ATM data, MainFrame parent) {
         super();
         this.data = data;
-        this.mySplitPane = mySplitPane; // neighbor
+        this.parent = parent;
         this.jsonWriter = new JsonWriter(JSON_STORE);
         this.jsonReader = new JsonReader(JSON_STORE);
 
@@ -89,6 +89,7 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
     private void loadData() {
         try {
             data = jsonReader.read();
+            parent.getMyContentPane().paintProjects(data); // paint projects
             System.out.println("Loaded " + " from " + JSON_STORE); // stub
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE); // stub

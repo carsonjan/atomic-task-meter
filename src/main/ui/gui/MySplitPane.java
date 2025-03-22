@@ -1,6 +1,7 @@
 package ui.gui;
 
 import java.awt.Dimension;
+import java.util.Collection;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -31,5 +32,12 @@ public class MySplitPane extends JPanel {
 
     public MyTaskPanel getTaskPanel() {
         return taskPanel;
+    }
+
+    // paint all projects from data to list in project panel
+    public void paintProjects(ATM data) {
+        this.data = data;
+        Collection elements = data.getProjects().keySet();
+        projectPanel.updateElements(elements);
     }
 }
