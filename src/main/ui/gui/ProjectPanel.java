@@ -23,13 +23,11 @@ public class ProjectPanel extends MyPanel {
 
     @Override
     protected MyScrollPane initItemPane() {
-        // TODO Auto-generated method stub
         return new ProjectPane();
     }
 
     @Override
     protected ToolPanel initToolPanel() {
-        // TODO Auto-generated method stub
         return new ProjectToolPanel();
     }
 
@@ -41,12 +39,9 @@ public class ProjectPanel extends MyPanel {
 
         @Override
         protected void selectionChangedAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'selectionChangedAction'");
             String currentProjectName = (String) list.getSelectedValue();
             taskPanel.changeTitleLabelProject(currentProjectName);
             taskPanel.setCurrentProjectName(currentProjectName);
-            // TODO change task to project task
             try {
                Collection<Task> tasks = data.findProject(currentProjectName).getTasks().values(); 
                taskPanel.drawTaskList(tasks);
@@ -60,10 +55,7 @@ public class ProjectPanel extends MyPanel {
 
         @Override
         protected void selectionNoneAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'selectionNoneAction'");
             taskPanel.changeTitleLabelNull();
-            // TODO change task to empty
             taskPanel.clearTaskList();
         }
 
@@ -77,13 +69,11 @@ public class ProjectPanel extends MyPanel {
 
         @Override
         protected AddListener initAddListener(JButton addButton) {
-            // TODO Auto-generated method stub
             return new ProjectAddListener();
         }
 
         @Override
         protected RmListener initRmListener() {
-            // TODO Auto-generated method stub
             return new ProjectRmListener();
         }
     }
@@ -96,8 +86,7 @@ public class ProjectPanel extends MyPanel {
 
         @Override
         protected void rmDataAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'rmDataAction'");
+            data.removeProject((String) list.getSelectedValue());
         }
     }
 
@@ -109,8 +98,7 @@ public class ProjectPanel extends MyPanel {
 
         @Override
         protected void addItemDataAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'addItemDataAction'");
+            data.makeProject((String) itemName.getText());
         }
     }
 }
