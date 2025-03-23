@@ -1,5 +1,8 @@
 package ui.gui;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.swing.*;
 import model.*;
 
@@ -40,12 +43,28 @@ public class ProjectPanel extends MyPanel {
         protected void selectionChangedAction() {
             // TODO Auto-generated method stub
             // throw new UnsupportedOperationException("Unimplemented method 'selectionChangedAction'");
+            String currentProjectName = (String) list.getSelectedValue();
+            taskPanel.changeTitleLabelProject(currentProjectName);
+            taskPanel.setCurrentProjectName(currentProjectName);
+            // TODO change task to project task
+            try {
+               Collection<Task> tasks = data.findProject(currentProjectName).getTasks().values(); 
+               taskPanel.drawTaskList(tasks);
+            } catch (NullPointerException e) {
+                // project not found
+                selectionNoneAction();
+                System.out.println("something get wrong: ProjectPanel selectionChangedAction: cannot find project");
+            }
+            
         }
 
         @Override
         protected void selectionNoneAction() {
             // TODO Auto-generated method stub
             // throw new UnsupportedOperationException("Unimplemented method 'selectionNoneAction'");
+            taskPanel.changeTitleLabelNull();
+            // TODO change task to empty
+            taskPanel.clearTaskList();
         }
 
     }

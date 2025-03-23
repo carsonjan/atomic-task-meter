@@ -1,9 +1,13 @@
 package ui.gui;
 
+import java.util.Collection;
+
 import javax.swing.*;
 import model.*;
 
 public class TaskPanel extends MyPanel {
+
+    private String currentProjectName;
     
     private final String titleStringNoProject = "Tasks in: <please first select a project...>";
 
@@ -17,32 +21,44 @@ public class TaskPanel extends MyPanel {
         return titleLabel;
     }
 
-    // paint all tasks given the currently selected project name
-    public void paintTasks(String currentProjectName) {
-        // TODO
+    // // paint all tasks given the currently selected project name
+    // public void paintTasks(String currentProjectName) {
+    //     // TODO not used, remove
+    // }
+
+    public void setCurrentProjectName(String currentProjectName) {
+        this.currentProjectName = currentProjectName;
     }
 
     // change title label when a project is selected
-    public void changedTitleLabelProject(String projectName) {
-        // TODO
+    public void changeTitleLabelProject(String projectName) {
         titleLabel.setText("Tasks in: " + projectName);
     }
 
     // change title label when a project is selected
-    public void changedTitleLabelNull() {
-        // TODO
+    public void changeTitleLabelNull() {
         titleLabel.setText(titleStringNoProject);
+    }
+
+    public void drawTaskList(Collection<Task> tasks) {
+        clearTaskList();
+        for (Task task : tasks) {
+            String taskName = task.getName();
+            listModel.addElement(taskName);
+        }
+    }
+
+    public void clearTaskList() {
+        listModel.clear();
     }
 
     @Override
     protected MyScrollPane initItemPane() {
-        // TODO Auto-generated method stub
         return new TaskPane();
     }
 
     @Override
     protected ToolPanel initToolPanel() {
-        // TODO Auto-generated method stub
         return new TaskToolPanel();
     }
 
@@ -54,14 +70,12 @@ public class TaskPanel extends MyPanel {
 
         @Override
         protected void selectionChangedAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'selectionChangedAction'");
+            // DO NOTHING
         }
 
         @Override
         protected void selectionNoneAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'selectionNoneAction'");
+            // DO NOTHING 
         }
 
     }
@@ -74,13 +88,11 @@ public class TaskPanel extends MyPanel {
 
         @Override
         protected AddListener initAddListener(JButton addButton) {
-            // TODO Auto-generated method stub
             return new TaskAddListener();
         }
 
         @Override
         protected RmListener initRmListener() {
-            // TODO Auto-generated method stub
             return new TaskRmListener();
         }
     }
@@ -93,8 +105,12 @@ public class TaskPanel extends MyPanel {
 
         @Override
         protected void rmDataAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'rmDataAction'");
+            try {
+                String currentTaskName = (String) list.getSelectedValue();
+                data.removeTask(currentProjectName, currentTaskName);
+            } catch (NullPointerException e) {
+                System.out.println("something get wrong: TaskPanel rmDataAction: cannot find task to remove");
+            }
         }
     }
 
@@ -106,8 +122,11 @@ public class TaskPanel extends MyPanel {
 
         @Override
         protected void addItemDataAction() {
-            // TODO Auto-generated method stub
-            // throw new UnsupportedOperationException("Unimplemented method 'addItemDataAction'");
+            try {
+                data.makeTask(currentProjectName, itemName.getText(), 0); // TODO make time not 0
+            } catch (NullPointerException e) {
+                System.out.println("something get wrong: TaskPanel addItemDataAction: cannot find project to add");
+            }
         }
     }
 }

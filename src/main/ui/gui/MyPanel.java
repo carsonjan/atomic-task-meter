@@ -135,8 +135,9 @@ public abstract class MyPanel extends JPanel {
             //there's a valid selection
             //so go ahead and remove whatever's selected.
             int index = list.getSelectedIndex();
-            listModel.remove(index);
+            String itemName = (String) list.getSelectedValue();
             rmDataAction();
+            listModel.remove(index);
 
             int size = listModel.getSize();
 
