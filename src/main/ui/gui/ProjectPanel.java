@@ -5,17 +5,17 @@ import model.*;
 
 public class ProjectPanel extends MyPanel {
 
-    private MySplitPane parent;
+    private TaskPanel taskPanel;
     
-    public ProjectPanel(ATM data, MySplitPane parent) {
+    public ProjectPanel(ATM data, TaskPanel taskPanel) {
         super(data);
-        this.parent = parent;
+        this.taskPanel = taskPanel;
     }
 
     @Override
     protected JLabel initTitleLabel() {
-        JLabel label = new JLabel("Projects", SwingConstants.CENTER);
-        return label;
+        titleLabel = new JLabel("Projects", SwingConstants.CENTER);
+        return titleLabel;
     }
 
     @Override

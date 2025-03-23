@@ -4,6 +4,8 @@ import javax.swing.*;
 import model.*;
 
 public class TaskPanel extends MyPanel {
+    
+    private final String titleStringNoProject = "Tasks in: <please first select a project...>";
 
     public TaskPanel(ATM data) {
         super(data);
@@ -11,13 +13,25 @@ public class TaskPanel extends MyPanel {
 
     @Override
     protected JLabel initTitleLabel() {
-        JLabel label = new JLabel("Projects", SwingConstants.CENTER);
-        return label;
+        titleLabel = new JLabel(titleStringNoProject, SwingConstants.CENTER);
+        return titleLabel;
     }
 
     // paint all tasks given the currently selected project name
     public void paintTasks(String currentProjectName) {
         // TODO
+    }
+
+    // change title label when a project is selected
+    public void changedTitleLabelProject(String projectName) {
+        // TODO
+        titleLabel.setText("Tasks in: " + projectName);
+    }
+
+    // change title label when a project is selected
+    public void changedTitleLabelNull() {
+        // TODO
+        titleLabel.setText(titleStringNoProject);
     }
 
     @Override

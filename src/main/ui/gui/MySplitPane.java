@@ -16,8 +16,8 @@ public class MySplitPane extends JSplitPane {
         super(JSplitPane.HORIZONTAL_SPLIT);
         this.data = data;
 
-        projectPanel = new ProjectPanel(data, this);
         taskPanel = new TaskPanel(data);
+        projectPanel = new ProjectPanel(data, taskPanel);
 
         setLeftComponent(projectPanel);
         setRightComponent(taskPanel);
@@ -30,11 +30,6 @@ public class MySplitPane extends JSplitPane {
         this.data = data;
         projectPanel.updateData(data);
         taskPanel.updateData(data);
-    }
-
-    // paint all tasks given the currently selected project name
-    public void paintTasks(String currentProjectName) {
-        taskPanel.paintTasks(currentProjectName);
     }
 
     // paint all projects from data to list in project panel
