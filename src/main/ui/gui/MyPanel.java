@@ -59,6 +59,7 @@ public abstract class MyPanel extends JPanel {
         // stub
         protected MyScrollPane() {
             super();
+            listModel = new DefaultListModel();
             list = new JList(listModel);
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             list.setSelectedIndex(0);
@@ -96,6 +97,7 @@ public abstract class MyPanel extends JPanel {
             rmButton = new JButton("🗑️");
             RmListener rmListener = initRmListener();
             rmButton.addActionListener(rmListener);
+            rmButton.setEnabled(false);
 
             ImageIcon imgIcon = new ImageIcon("data/plusImage.png");
             imgIcon = (ImageIcon) resizeIcon(imgIcon, 15, 15);
