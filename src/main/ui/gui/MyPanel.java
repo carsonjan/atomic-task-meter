@@ -51,4 +51,9 @@ public class MyPanel extends JPanel {
         data.makeProject(name);
     }
 
+    public void updateData(ATM data) {
+        this.data = data;
+        itemPane.updateData(data);
+        toolPanel.updateData(data);
+    }
 }

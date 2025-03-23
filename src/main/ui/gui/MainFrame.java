@@ -37,4 +37,10 @@ public class MainFrame extends JFrame {
     public MyMenuBar getMyMenuBar() {
         return myMenuBar;
     }
+
+    public void updateData(ATM data) {
+        this.data = data;
+        myContentPane.updateData(data);
+        myMenuBar.updateData(data);
+    }
 }

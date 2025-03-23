@@ -89,10 +89,15 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
     private void loadData() {
         try {
             data = jsonReader.read();
-            parent.getMyContentPane().paintProjects(data); // paint projects
+            parent.updateData(data);
+            parent.getMyContentPane().paintProjects(); // paint projects
             System.out.println("Loaded " + " from " + JSON_STORE); // stub
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE); // stub
         }
+    }
+
+    public void updateData(ATM data) {
+        this.data = data;
     }
 }

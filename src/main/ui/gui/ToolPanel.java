@@ -172,5 +172,10 @@ public class ToolPanel extends JPanel {
             }
             return false;
         }
+        
+    }
+
+    public void updateData(ATM data) {
+        this.data = data;
     }
 }

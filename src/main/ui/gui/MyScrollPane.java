@@ -71,4 +71,8 @@ public class MyScrollPane extends JScrollPane implements ListSelectionListener {
             listModel.addElement(o);
         }
     }
+
+    public void updateData(ATM data) {
+        this.data = data;
+    }
 }

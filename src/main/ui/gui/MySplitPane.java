@@ -35,9 +35,14 @@ public class MySplitPane extends JPanel {
     }
 
     // paint all projects from data to list in project panel
-    public void paintProjects(ATM data) {
-        this.data = data;
+    public void paintProjects() {
         Collection elements = data.getProjects().keySet();
         projectPanel.updateElements(elements);
+    }
+
+    public void updateData(ATM data) {
+        this.data = data;
+        projectPanel.updateData(data);
+        taskPanel.updateData(data);
     }
 }
