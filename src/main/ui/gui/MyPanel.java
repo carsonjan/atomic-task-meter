@@ -24,10 +24,10 @@ public class MyPanel extends JPanel {
         JLabel titleLabel = new JLabel(title);
         add(titleLabel, BorderLayout.NORTH);
         
-        itemPane = new MyScrollPane(data);
+        itemPane = new MyScrollPane(data, this);
         add(itemPane, BorderLayout.CENTER);
 
-        toolPanel = new ToolPanel(data);
+        toolPanel = new ToolPanel(data, this);
         add(toolPanel, BorderLayout.SOUTH);
     }
 
@@ -45,6 +45,10 @@ public class MyPanel extends JPanel {
 
     public void updateElements(Collection oList) {
         itemPane.updateElements(oList);
+    }
+
+    public void addItem(String name) {
+        data.makeProject(name);
     }
 
 }

@@ -11,12 +11,14 @@ import model.ATM;
 public class MyScrollPane extends JScrollPane implements ListSelectionListener {
 
     private ATM data;
+    private MyPanel parent;
     private JList list;
     private DefaultListModel listModel;
 
-    public MyScrollPane(ATM data) {
+    public MyScrollPane(ATM data, MyPanel parent) {
 
         this.data = data;
+        this.parent = parent;
         
         // stub
         listModel = new DefaultListModel();

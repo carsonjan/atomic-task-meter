@@ -11,11 +11,13 @@ import model.ATM;
 public class ToolPanel extends JPanel {
     
     private ATM data;
+    private MyPanel parent;
     private JButton rmButton;
     private JTextField itemName;
 
-    public ToolPanel(ATM data) {
+    public ToolPanel(ATM data, MyPanel parent) {
         this.data = data;
+        this.parent = parent;
         
         rmButton = new JButton("🗑️");
         rmButton.addActionListener(new RmListener());
@@ -115,7 +117,9 @@ public class ToolPanel extends JPanel {
             }
 
             listModel.insertElementAt(itemName.getText(), index);
+            
             // data.makeProject(itemName.getText()); TODO this can add project, but add task also add project
+            parent.addItem(itemName.getText());
             //If we just wanted to add to the end, we'd do this:
             //listModel.addElement(employeeName.getText());
 
