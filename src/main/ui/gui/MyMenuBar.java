@@ -1,17 +1,13 @@
 package ui.gui;
 
-import javax.swing.BorderFactory;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import model.ATM;
-import model.Task;
-import persistence.JsonReader;
-import persistence.JsonWriter;
+import java.awt.event.*;
+import javax.swing.*;
+
+import model.*;
+import persistence.*;
 
 public class MyMenuBar extends JMenuBar implements ActionListener {
     
@@ -90,7 +86,7 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
         try {
             data = jsonReader.read();
             parent.updateData(data);
-            parent.getMyContentPane().paintProjects(); // paint projects
+            parent.getSplitPane().paintProjects(); // paint projects
             System.out.println("Loaded " + " from " + JSON_STORE); // stub
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE); // stub
@@ -99,5 +95,5 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
 
     public void updateData(ATM data) {
         this.data = data;
-    }
+    } 
 }

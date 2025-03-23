@@ -1,48 +1,44 @@
 package ui.gui;
 
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Collection;
 
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
+import model.*;
 
-import model.ATM;
+public class MySplitPane extends JSplitPane {
 
-public class MySplitPane extends JPanel {
     private ATM data;
-    private JSplitPane splitPane;
-    private MyPanel projectPanel;
-    private MyTaskPanel taskPanel;
+    private ProjectPanel projectPanel;
+    private TaskPanel taskPanel;
 
     public MySplitPane(ATM data) {
+        super(JSplitPane.HORIZONTAL_SPLIT);
         this.data = data;
-        projectPanel = new MyPanel("Projects", data);
-        taskPanel = new MyTaskPanel("Tasks for <Project Name>", data);
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                                   projectPanel, taskPanel);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(250);
-        splitPane.setPreferredSize(new Dimension(700, 400));
-        add(splitPane);
-    }
 
-    public MyPanel getProjectPanel() {
-        return projectPanel;
-    }
+        projectPanel = new ProjectPanel(data);
+        taskPanel = new TaskPanel(data);
 
-    public MyTaskPanel getTaskPanel() {
-        return taskPanel;
-    }
-
-    // paint all projects from data to list in project panel
-    public void paintProjects() {
-        Collection elements = data.getProjects().keySet();
-        projectPanel.updateElements(elements);
+        setLeftComponent(projectPanel);
+        setRightComponent(taskPanel);
+        setOneTouchExpandable(true);
+        setDividerLocation(250);
+        setPreferredSize(new Dimension(700, 400));
     }
 
     public void updateData(ATM data) {
         this.data = data;
         projectPanel.updateData(data);
         taskPanel.updateData(data);
+    }
+
+    public void updateTaskPanel(String currentProjectName) {
+        taskPanel.updateTaskPanel(currentProjectName);
+    }
+
+    // paint all projects from data to list in project panel
+    public void paintProjects() {
+        Collection elements = data.getProjects().keySet();
+        projectPanel.updateElements(elements);
     }
 }
