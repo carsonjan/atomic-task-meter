@@ -64,3 +64,7 @@ As a user, I want to be able to:
     1. Click `File` in the menu bar
     2. Click `load` in the drop down menu
 
+
+## Citation
+- https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
+
