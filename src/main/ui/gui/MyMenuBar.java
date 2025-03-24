@@ -9,6 +9,7 @@ import javax.swing.*;
 import model.*;
 import persistence.*;
 
+// the menu bar
 public class MyMenuBar extends JMenuBar implements ActionListener {
     
     private ATM data;
@@ -17,7 +18,7 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    // make menu bar
+    // EFFECTS: constructs menu bar
     public MyMenuBar(ATM data, MainFrame parent) {
         super();
         this.data = data;
@@ -43,6 +44,7 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
         setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
     }
 
+    // EFFECTS: handle click actions
     public void actionPerformed(ActionEvent e) {
         JMenuItem source = (JMenuItem)(e.getSource());
         switch (source.getText()) {
@@ -80,7 +82,7 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: data
     // EFFECTS: loads atm from file
     private void loadData() {
         try {
@@ -93,6 +95,8 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: update this and its subs data to input
     public void updateData(ATM data) {
         this.data = data;
     } 

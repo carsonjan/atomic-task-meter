@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.awt.*;
 import model.*;
 
+// the abstract class for a itemPanel (project panel OR task panel)
 public abstract class MyPanel extends JPanel {
 
     protected ATM data;
@@ -20,7 +21,7 @@ public abstract class MyPanel extends JPanel {
     protected JButton addButton;
     protected JTextField itemName;
 
-    
+    // EFFECTS: constructs the panel
     public MyPanel(ATM data) {
         super(new BorderLayout());
         this.data = data;
@@ -35,17 +36,23 @@ public abstract class MyPanel extends JPanel {
         add(toolPanel, BorderLayout.SOUTH);
     }
 
+    // EFFECTS: return a new title label
     protected abstract JLabel initTitleLabel();
     
+    // EFFECTS: return a new item pane
     protected abstract MyScrollPane initItemPane();
 
+    // EFFECTS: return a new tool panel
     protected abstract ToolPanel initToolPanel();
 
+    // MODIFIES: this
+    // EFFECTS: update this and its subs data to input
     public void updateData(ATM data) {
         this.data = data;
     }
 
-    // clear current list, put all elements into list
+    // MODIFIES: this
+    // EFFECTS: clear current list, put all elements into list
     public void updateElements(Collection objList) {
         listModel.clear();
         for (Object o : objList) {
@@ -54,9 +61,10 @@ public abstract class MyPanel extends JPanel {
     }
 
 
-
+    // abstract class of a item pane
     abstract class MyScrollPane extends JScrollPane implements ListSelectionListener {
-        // stub
+
+        // EFFECTS: constructs an item pane
         protected MyScrollPane() {
             super();
             listModel = new DefaultListModel();
@@ -68,6 +76,8 @@ public abstract class MyPanel extends JPanel {
             setViewportView(list);
         }
 
+        // MODIFIES: this
+        // EFFECTS: update the remove button and perform panel specific action when selection is changed
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if (e.getValueIsAdjusting() == false) {
@@ -85,13 +95,17 @@ public abstract class MyPanel extends JPanel {
             }
         }
 
+        // EFFECTS: perform an action when list selection is changed
         protected abstract void selectionChangedAction();
 
+        // EFFECTS: perform an action when there is no selection (init/ removed all items)
         protected abstract void selectionNoneAction();
     }
 
+    // the abstract class for a tool panel
     abstract class ToolPanel extends JPanel {
-        //stub
+
+        // EFFECTS: constructs a tool panel
         protected ToolPanel() {
             super();
             rmButton = new JButton("🗑️");
@@ -117,19 +131,26 @@ public abstract class MyPanel extends JPanel {
             add(addButton);
         }
 
+        // EFFECTS: return a resized copy of the given icon 
         private Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
             Image img = icon.getImage();  
             Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);  
             return new ImageIcon(resizedImage);
         }
 
+        // EFFECTS: return an item add listener
         protected abstract AddListener initAddListener(JButton addButton);
 
+        // EFFECTS: return an item remove listener
         protected abstract RmListener initRmListener();
 
     }
 
+    // an abstract remove action listener
     abstract class RmListener implements ActionListener {
+
+        // MODIFIES: this
+        // EFFECTS: handle the remove action
         public void actionPerformed(ActionEvent e) {
             //This method can be called only if
             //there's a valid selection
@@ -155,6 +176,7 @@ public abstract class MyPanel extends JPanel {
             }
         }
 
+        // EFFECTS: perform an action to data when item is removed
         protected abstract void rmDataAction();
     }
 
@@ -163,10 +185,13 @@ public abstract class MyPanel extends JPanel {
         private boolean alreadyEnabled = false;
         private JButton button;
 
+        // EFFECTS: construct the add listener
         public AddListener(JButton button) {
             this.button = button;
         }
 
+        // MODIFIES: this
+        // EFFECTS: handle the add action
         //Required by ActionListener.
         public void actionPerformed(ActionEvent e) {
             String name = itemName.getText();
@@ -198,39 +223,46 @@ public abstract class MyPanel extends JPanel {
             list.ensureIndexIsVisible(index);
         }
 
-        // what to do with data when item is added
+        // what to do with data when item is added\
+        // EFFECTS: perform an action to data when item is added
         protected abstract void addItemDataAction();
 
-        //This method tests for string equality. You could certainly
-        //get more sophisticated about the algorithm.  For example,
-        //you might want to ignore white space and capitalization.
+        
+        // EFFECTS: return if a name is already in list
         protected boolean alreadyInList(String name) {
             return listModel.contains(name);
         }
 
         //Required by DocumentListener.
+        // EFFECTS: enable button when item is inserted
         public void insertUpdate(DocumentEvent e) {
             enableButton();
         }
 
         //Required by DocumentListener.
+        // EFFECTS: none
         public void removeUpdate(DocumentEvent e) {
             handleEmptyTextField(e);
         }
 
         //Required by DocumentListener.
+        // EFFECTS: enable button when item is changed
         public void changedUpdate(DocumentEvent e) {
             if (!handleEmptyTextField(e)) {
                 enableButton();
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: enable button when it is not enabled
         private void enableButton() {
             if (!alreadyEnabled) {
                 button.setEnabled(true);
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: disable add button when theres no name inputed 
         private boolean handleEmptyTextField(DocumentEvent e) {
             if (e.getDocument().getLength() <= 0) {
                 button.setEnabled(false);

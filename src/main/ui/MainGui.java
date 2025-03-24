@@ -12,6 +12,7 @@ import ui.gui.MySplitPane;
 import ui.gui.MainFrame;
 import ui.gui.MyMenuBar;
 
+// the main gui function
 public class MainGui {
 
     public static void main(String[] args) {

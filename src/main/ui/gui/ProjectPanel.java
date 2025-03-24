@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.swing.*;
 import model.*;
 
+// a project panel, concrete implementation of MyPanel, docs done in MyPanel
 public class ProjectPanel extends MyPanel {
 
     private TaskPanel taskPanel;

@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.swing.*;
 import model.*;
 
+// a task panel, concrete implementation of MyPanel, docs done in MyPanel
 public class TaskPanel extends MyPanel {
 
     private String currentProjectName;
@@ -25,16 +26,20 @@ public class TaskPanel extends MyPanel {
         this.currentProjectName = currentProjectName;
     }
 
-    // change title label when a project is selected
+    // MODIFIES: this
+    // EFFECTS: change title label when a project is selected
     public void changeTitleLabelProject(String projectName) {
         titleLabel.setText("Tasks in: " + projectName);
     }
 
-    // change title label when a project is selected
+    // MODIFIES: this
+    // EFFECTS: change title label when a project is selected
     public void changeTitleLabelNull() {
         titleLabel.setText(titleStringNoProject);
     }
 
+    // MODIFIES: this
+    // EFFECTS: change task list to task of currently selected project
     public void drawTaskList(Collection<Task> tasks) {
         clearTaskList();
         for (Task task : tasks) {
@@ -43,6 +48,8 @@ public class TaskPanel extends MyPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: clear the task list
     public void clearTaskList() {
         listModel.clear();
     }
