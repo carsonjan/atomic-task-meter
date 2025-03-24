@@ -197,7 +197,7 @@ public abstract class MyPanel extends JPanel {
             String name = itemName.getText();
 
             //User didn't type in a unique name...
-            if (name.equals("") || alreadyInList(name)) {
+            if (name.equals("") || alreadyInList(name) || name.contains("//")) {
                 Toolkit.getDefaultToolkit().beep();
                 itemName.requestFocusInWindow();
                 itemName.selectAll();
