@@ -37,4 +37,30 @@ As a user, I want to be able to:
 3. remove a subject from the collection
 4. mark a task as done
 5. stop the timing and save all current projects/tasks when I want to save and quit the program
-6. resume my saved projects/tasks when I enter the program and open my last save 
+6. resume my saved projects/tasks when I enter the program and open my last save
+
+## Instructions for End User
+
+- You can add multiple `Projects` to the `Project list` by...
+    1. Typing a project name in the text bar (bottom of the **left** panel)
+    2. Clicking the "plus" button
+    3. The new project will be listed in the left panel
+    4. Repeat as needed to add multiple projects
+- You can view all `Tasks` within a specific `Project` by... 
+    - the first required action related to the user story "adding multiple Xs to a Y"
+    1. Click on a project to select it (the **left** panel)
+    2. Tasks within the project are automatically retrieved and displayed on the **right** panel 
+- You can remove a `Project` by...
+    - the second required action related to the user story "adding multiple Xs to a Y
+    1. Click on a project to select it (the **left** panel)
+    2. Click on the "trash" button
+    3. Repeat as needed to remove multiple projects
+- You can locate my visual component by...
+    - the "plus" button on both left and right panel. The "plus" sign is an image (stored in `data/`), NOT an emoji.
+- You can save the state of my application by...
+    1. Click `File` in the menu bar
+    2. Click `save` in the drop down menu
+- You can reload the state of my application by...
+    1. Click `File` in the menu bar
+    2. Click `load` in the drop down menu
+
