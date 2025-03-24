@@ -43,8 +43,8 @@ public class ProjectPanel extends MyPanel {
             taskPanel.changeTitleLabelProject(currentProjectName);
             taskPanel.setCurrentProjectName(currentProjectName);
             try {
-               Collection<Task> tasks = data.findProject(currentProjectName).getTasks().values(); 
-               taskPanel.drawTaskList(tasks);
+                Collection<Task> tasks = data.findProject(currentProjectName).getTasks().values(); 
+                taskPanel.drawTaskList(tasks);
             } catch (NullPointerException e) {
                 // project not found
                 selectionNoneAction();

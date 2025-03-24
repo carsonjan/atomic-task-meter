@@ -21,11 +21,6 @@ public class TaskPanel extends MyPanel {
         return titleLabel;
     }
 
-    // // paint all tasks given the currently selected project name
-    // public void paintTasks(String currentProjectName) {
-    //     // TODO not used, remove
-    // }
-
     public void setCurrentProjectName(String currentProjectName) {
         this.currentProjectName = currentProjectName;
     }
