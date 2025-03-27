@@ -59,7 +59,7 @@ public class ATM implements Writable {
     public void addProject(Project project) {
         String name = project.getName();
         projects.put(name, project);
-        logEvent("Project" + name + "added");
+        logEvent("Project " + name + " added");
     }
 
     // /*
@@ -94,7 +94,7 @@ public class ATM implements Writable {
      *         return null if not founded
      */
     public Project removeProject(String name) {
-        logEvent("Project" + name + "removed");
+        logEvent("Project " + name + " removed");
         return projects.remove(name);
     }
 
@@ -116,7 +116,7 @@ public class ATM implements Writable {
     public void makeTask(String projectName, String taskName, double estTime) {
         Task task = new Task(projectName + "//" + taskName, estTime);
         findProject(projectName).addTask(task);
-        logEvent("Task" + taskName + "added in project" + projectName);
+        logEvent("Task " + taskName + " added in project " + projectName);
     }
 
     /*
@@ -140,7 +140,7 @@ public class ATM implements Writable {
         Project project = findProject(projectName);
         Task task = project.findTask(projectName + "//" + taskName);
         project.removeTask(projectName + "//" + taskName);
-        logEvent("Task" + taskName + "removed from project" + projectName);
+        logEvent("Task " + taskName + " removed from project " + projectName);
         return task;
     }
 
