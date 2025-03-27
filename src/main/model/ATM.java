@@ -52,6 +52,7 @@ public class ATM implements Writable {
     public void makeProject(String name) {
         Project project = new Project(name);
         projects.put(name, project);
+        logEvent("Project" + name + "added");
     }
 
     // MODIFIES: this
@@ -92,6 +93,7 @@ public class ATM implements Writable {
      *         return null if not founded
      */
     public Project removeProject(String name) {
+        logEvent("Project" + name + "removed");
         return projects.remove(name);
     }
 
@@ -113,6 +115,7 @@ public class ATM implements Writable {
     public void makeTask(String projectName, String taskName, double estTime) {
         Task task = new Task(projectName + "//" + taskName, estTime);
         findProject(projectName).addTask(task);
+        logEvent("Task" + taskName + "added in project" + projectName);
     }
 
     /*
@@ -136,6 +139,7 @@ public class ATM implements Writable {
         Project project = findProject(projectName);
         Task task = project.findTask(projectName + "//" + taskName);
         project.removeTask(projectName + "//" + taskName);
+        logEvent("Task" + taskName + "removed from project" + projectName);
         return task;
     }
 
@@ -224,6 +228,10 @@ public class ATM implements Writable {
         JSONObject json = new JSONObject();
         json.put("projects", projects);
         return json;
+    }
+
+    private void logEvent(String msg) {
+        EventLog.getInstance().logEvent(new Event(msg));
     }
     
 
