@@ -49,15 +49,12 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
         JMenuItem source = (JMenuItem)(e.getSource());
         switch (source.getText()) {
             case "Save":
-                System.out.println("save!"); // stub
                 saveData();
                 break;
             case "Load":
-                System.out.println("load!"); //stub
                 loadData();
                 break;
             case "About":
-                System.out.println("about!"); //stub
                 break;
             default:
                 // pass (should not reach, do nothing)
