@@ -231,6 +231,16 @@ public class ATM implements Writable {
         return json;
     }
 
+    // EFFECTS: log save of ATM
+    public void logSave() {
+        logEvent("data saved");
+    }
+
+    // EFFECTS: log load of ATM
+    public void logLoad() {
+        logEvent("data loaded");
+    }
+
     private void logEvent(String msg) {
         EventLog.getInstance().logEvent(new Event(msg));
     }

@@ -1,31 +1,28 @@
 {"projects": {
-    "cs": {
+    "stat 201": {
         "totalActTime": "PT0S",
-        "name": "cs",
-        "totalEstTime": "PT5H",
-        "tasks": {
-            "cs//ch2": {
-                "path": "cs//ch2",
-                "name": "ch2",
-                "actTime": "PT0S",
-                "projectName": "cs",
-                "isDone": false,
-                "estTime": "PT3H"
-            },
-            "cs//ch1": {
-                "path": "cs//ch1",
-                "name": "ch1",
-                "actTime": "PT1M28.651695S",
-                "projectName": "cs",
-                "isDone": false,
-                "estTime": "PT2H"
-            }
-        }
-    },
-    "ds": {
-        "totalActTime": "PT0S",
-        "name": "ds",
+        "name": "stat 201",
         "totalEstTime": "PT0S",
-        "tasks": {}
+        "tasks": {"stat 201//study midterm": {
+            "path": "stat 201//study midterm",
+            "name": "study midterm",
+            "actTime": "PT0S",
+            "projectName": "stat 201",
+            "isDone": false,
+            "estTime": "PT0S"
+        }}
+    },
+    "cpsc 210": {
+        "totalActTime": "PT0S",
+        "name": "cpsc 210",
+        "totalEstTime": "PT0S",
+        "tasks": {"cpsc 210//do project p4": {
+            "path": "cpsc 210//do project p4",
+            "name": "do project p4",
+            "actTime": "PT0S",
+            "projectName": "cpsc 210",
+            "isDone": false,
+            "estTime": "PT0S"
+        }}
     }
 }}

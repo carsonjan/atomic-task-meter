@@ -65,17 +65,15 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
     private void saveData() {
         Task currentTask = data.getCurrentTask();
         if (currentTask != null) {
-            Double addTime = data.stopTask(currentTask);
-            System.out.println("> stopped timing: " + currentTask.getName()); // stub
-            System.out.println("> Accumulated an extra " + addTime + "hours"); // stub
+            data.stopTask(currentTask);
         }
         try {
             jsonWriter.open();
             jsonWriter.write(data);
             jsonWriter.close();
-            System.out.println("Saved " + " to " + JSON_STORE); // stub
+            data.logSave();
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE); // stub
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
@@ -85,10 +83,10 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
         try {
             data = jsonReader.read();
             parent.updateData(data);
+            data.logLoad();
             parent.getSplitPane().paintProjects(); // paint projects
-            System.out.println("Loaded " + " from " + JSON_STORE); // stub
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE); // stub
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
