@@ -51,14 +51,15 @@ public class ATM implements Writable {
      */
     public void makeProject(String name) {
         Project project = new Project(name);
-        projects.put(name, project);
-        logEvent("Project" + name + "added");
+        addProject(project);
     }
 
     // MODIFIES: this
     // EFFECTS: add a project into projects
     public void addProject(Project project) {
-        projects.put(project.getName(), project);
+        String name = project.getName();
+        projects.put(name, project);
+        logEvent("Project" + name + "added");
     }
 
     // /*
