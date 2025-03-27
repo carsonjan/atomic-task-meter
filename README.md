@@ -68,3 +68,39 @@ As a user, I want to be able to:
 ## Citation
 - https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
 
+
+## Phase 4: Task 2
+
+**Action**
+```
+make project: stat 201
+make project: cpsc 110
+make project: cpsc 210
+remove project: cpsc 110
+add task in cpsc 210: do project p3
+add task in cpsc 210: do project p4
+add task in stat 201: study midterm
+remove task from cpsc 210:  do project p3
+save
+```
+**Log**
+```
+Thu Mar 27 15:58:49 PDT 2025
+Project stat 201 added
+Thu Mar 27 15:58:55 PDT 2025
+Project cpsc 110 added
+Thu Mar 27 15:59:00 PDT 2025
+Project cpsc 210 added
+Thu Mar 27 15:59:03 PDT 2025
+Project cpsc 110 removed
+Thu Mar 27 15:59:33 PDT 2025
+Task do project p3 added in project cpsc 210
+Thu Mar 27 15:59:37 PDT 2025
+Task do project p4 added in project cpsc 210
+Thu Mar 27 15:59:54 PDT 2025
+Task study midterm added in project stat 201
+Thu Mar 27 16:00:08 PDT 2025
+Task do project p3 removed from project cpsc 210
+Thu Mar 27 16:00:12 PDT 2025
+data saved
+```
