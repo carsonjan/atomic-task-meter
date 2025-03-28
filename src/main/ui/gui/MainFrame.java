@@ -50,6 +50,7 @@ public class MainFrame extends JFrame implements WindowListener {
         System.out.println("window closed");
     }
 
+    // EFFECTS: print event log and close program
     @Override
     public void windowClosing(WindowEvent arg0) {
         printEventLog();
@@ -76,6 +77,7 @@ public class MainFrame extends JFrame implements WindowListener {
         // pass
     }
 
+    // EFFECTS: print all eventLog on terminal 
     private void printEventLog() {
         for (Event e : EventLog.getInstance()) {
             System.out.println(e.toString());

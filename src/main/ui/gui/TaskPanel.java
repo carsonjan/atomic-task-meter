@@ -105,6 +105,9 @@ public class TaskPanel extends MyPanel {
             super();
         }
 
+        // REQUIRES: tasks exists
+        // MODIFIES: data
+        // EFFECTS: remove the task
         @Override
         protected void rmDataAction() {
             try {
@@ -122,6 +125,9 @@ public class TaskPanel extends MyPanel {
             super(addButton);
         }
 
+        // REQUIRES: project to add task to exists
+        // MODIFIES: data
+        // EFFECTS: add a task
         @Override
         protected void addItemDataAction() {
             try {

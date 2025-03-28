@@ -38,6 +38,7 @@ public class ProjectPanel extends MyPanel {
             super();
         }
 
+        // EFFECTS: draw tasks in the selected project onto taskPanel
         @Override
         protected void selectionChangedAction() {
             String currentProjectName = (String) list.getSelectedValue();
@@ -54,6 +55,7 @@ public class ProjectPanel extends MyPanel {
             
         }
 
+        // EFFECTS: clear taskPanel and reset its title 
         @Override
         protected void selectionNoneAction() {
             taskPanel.changeTitleLabelNull();
@@ -85,6 +87,8 @@ public class ProjectPanel extends MyPanel {
             super();
         }
 
+        // MODIFIES: data
+        // EFFECTS: remove project
         @Override
         protected void rmDataAction() {
             data.removeProject((String) list.getSelectedValue());
@@ -97,6 +101,8 @@ public class ProjectPanel extends MyPanel {
             super(addButton);
         }
 
+        // MODIFIES: data
+        // EFFECTS: add new project
         @Override
         protected void addItemDataAction() {
             data.makeProject((String) itemName.getText());
