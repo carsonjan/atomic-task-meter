@@ -180,3 +180,17 @@ Task do project p3 removed from project cpsc 210
 Thu Mar 27 16:00:12 PDT 2025
 data saved
 ```
+
+## Phase 4: Task 3
+
+**Refactoring 1**
+
+Make ATM as a static class with private constructor (like EventLog), this ensures every other classes are accessing the same instance of ATM data, without the need to manually keep instances in sync.
+
+**Refactoring 2**
+
+Make ATM associated with NodeLike instead of Project, this allow type substitution (eg: ATM has Agendas instead of Projects).
+
+**Refactoring 3**
+
+Abstract the Save/ Load functionality as a separate class. This removes code duplication in MyMenuBar and AtmApp which both calls JsonWriter and JsonReader.
