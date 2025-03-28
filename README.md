@@ -68,6 +68,82 @@ As a user, I want to be able to:
 ## Citation
 - https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
 
+## Class diagram source code
+
+```mermaid
+---
+config:
+  theme: mc
+  class:
+    hideEmptyMembersBox: true
+  look: classic
+  layout: elk
+---
+classDiagram
+direction TB
+    class ATM {
+    }
+    class Task {
+    }
+    class Project {
+    }
+    class EventLog {
+    }
+    class Event {
+    }
+    class NodeLike {
+    }
+    class Writable {
+    }
+    class AtmApp {
+    }
+    class JsonReader {
+    }
+    class JsonWriter {
+    }
+    class Main {
+    }
+    class MainGui {
+    }
+    class MainFrame {
+    }
+    class MySplitPane {
+    }
+    class MyMenuBar {
+    }
+    class MyPanel {
+    }
+    class ProjectPanel {
+    }
+    class TaskPanel {
+    }
+	<<abstract>> NodeLike
+	<<interface>> Writable
+	<<abstract>> MyPanel
+    ATM --> Task
+    ATM --> "0..*" Project
+    ATM ..|> Writable
+    EventLog --> "0..*" Event
+    Project --|> NodeLike
+    NodeLike --> "0..*" Task
+    AtmApp --> ATM
+    AtmApp --> JsonReader
+    AtmApp --> JsonWriter
+    Main ..> AtmApp
+    MainGui ..> MainFrame
+    MainFrame --> MySplitPane
+    MainFrame <--> MyMenuBar
+    MyMenuBar --> ATM
+    MyMenuBar --> JsonReader
+    MyMenuBar --> JsonWriter
+    MyPanel --> ATM
+    MySplitPane --> ProjectPanel
+    MySplitPane --> TaskPanel
+    MySplitPane --> ATM
+    ProjectPanel --|> MyPanel
+    ProjectPanel --> TaskPanel
+    TaskPanel --|> MyPanel
+```
 
 ## Phase 4: Task 2
 
